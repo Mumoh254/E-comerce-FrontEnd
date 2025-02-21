@@ -18,16 +18,18 @@ const Header = () => {
       <header
         className="header-top-strip px-3 px-md-4 py-2"
         style={{
-          background: "linear-gradient(45deg,rgb(231, 8, 8),rgb(235, 182, 58))",
+          background: "linear-gradient(45deg, rgb(231, 8, 8), rgb(235, 182, 58))",
           color: "#fff",
         }}
       >
         <div className="container-xxl d-flex justify-content-between align-items-center">
-          <p className="mb-0 fw-bold "  style={{ fontSize: "12px"}}>🔥 Exclusive Discounts </p>
-          <p className="mb-0"  style={{fontSize: "12px"}}>
-            Hotline:{"   "}
-            <a className="fw-bold" href="tel:+254740045355" style={{ color: "#6B5B95",  fontSize:  "12px"}}>
-               +254 740 045 355
+          <p className="mb-0 fw-bold" style={{ fontSize: "12px" }}>
+            🔥 Exclusive Discounts
+          </p>
+          <p className="mb-0" style={{ fontSize: "12px" }}>
+            Hotline:{" "}
+            <a className="fw-bold" href="tel:+254740045355" style={{ color: "#6B5B95", fontSize: "12px" }}>
+              +254 740 045 355
             </a>
           </p>
         </div>
@@ -69,7 +71,7 @@ const Header = () => {
             </div>
 
             {/* 🔹 Cart, Login, Sign Up */}
-            <div className="col-12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center gap-3">
+            <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-3">
               {/*  Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
                 <FaShoppingCart size={22} style={{ color: "#6B5B95" }} />
@@ -125,13 +127,14 @@ const Header = () => {
             <div className="container-fluid">
               {/* 🔹 Mobile Menu Button */}
               <button
-                className="navbar-toggler"
+                className="navbar-toggler border-0"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarNav"
                 aria-controls="navbarNav"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
+                style={{ outline: "none", boxShadow: "none" }}
               >
                 <span className="navbar-toggler-icon"></span>
               </button>
