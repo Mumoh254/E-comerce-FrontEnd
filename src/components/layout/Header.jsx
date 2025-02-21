@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { FaShoppingCart, FaSignInAlt, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaUserPlus, FaThList } from "react-icons/fa"; // Added FaThList for Categories
 import { BiSearch } from "react-icons/bi";
 import { GiClothes, GiRunningShoe, GiKidneys, GiFamilyHouse } from "react-icons/gi";
 
 const Header = () => {
   const [cartCount, setCartCount] = useState(0); // State to manage cart count
-
-  // Function to add a product to the cart (for demonstration purposes)
-  const addToCart = () => {
-    setCartCount(cartCount + 1);
-  };
 
   return (
     <>
@@ -52,7 +47,7 @@ const Header = () => {
               </h1>
             </div>
 
-            {/* Search Bar */}
+            {/* 🔹 Search Bar */}
             <div className="col-12 col-md-5 mb-3 mb-md-0">
               <div className="input-group">
                 <input
@@ -72,10 +67,10 @@ const Header = () => {
 
             {/* 🔹 Cart, Login, Sign Up */}
             <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-3">
-              {/*  Cart */}
+              {/* 🔹 Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
                 <FaShoppingCart size={22} style={{ color: "#6B5B95" }} />
-                {/* Cart Counter Badge */}
+                {/* 🔹 Cart Counter Badge */}
                 <span
                   style={{
                     position: "absolute",
@@ -100,7 +95,7 @@ const Header = () => {
                 </span>
               </Link>
 
-              {/*  Login */}
+              {/* 🔹 Login */}
               <Link to="/login" className="text-dark d-flex align-items-center">
                 <FaSignInAlt size={20} style={{ color: "#6B5B95" }} />
                 <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "#6B5B95" }}>
@@ -108,7 +103,7 @@ const Header = () => {
                 </span>
               </Link>
 
-              {/* Sign Up */}
+              {/* 🔹 Sign Up */}
               <Link to="/signup" className="text-dark d-flex align-items-center">
                 <FaUserPlus size={20} style={{ color: "#6B5B95" }} />
                 <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "#6B5B95" }}>
@@ -142,57 +137,67 @@ const Header = () => {
               {/* 🔹 Navbar Items */}
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mx-auto gap-3">
+                  {/* 🔹 Categories */}
+                  <li className="nav-item">
+                    <NavLink className="nav-link fw-bold d-flex align-items-center" to="/categories" style={{ color: "#333" }}>
+                      <FaThList size={18} className="me-1" /> Categories
+                    </NavLink>
+                  </li>
+
+                  {/* 🔹 Home */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/" style={{ color: "#333" }}>
                       Home
                     </NavLink>
                   </li>
+
+                  {/* 🔹 Shop */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/shop" style={{ color: "#333" }}>
                       Shop
                     </NavLink>
                   </li>
 
-                  {/* 🏷️ Hot Deals */}
+                  {/* 🔹 Hot Deals */}
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
-                      to="/hot-deals"
+                      to="/hotdeals"
                       style={{ background: "linear-gradient(45deg, #FF6B6B, #FFD166)", WebkitBackgroundClip: "text", color: "transparent" }}
                     >
                       🔥 Hot Deals
                     </NavLink>
                   </li>
 
-                  {/* 👟 Sneakers */}
+                  {/* 🔹 Sneakers */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/sneakers" style={{ color: "#333" }}>
                       <GiRunningShoe size={18} className="me-1" /> Sneakers
                     </NavLink>
                   </li>
 
-                  {/* 👗 Women's Collection */}
+                  {/* 🔹 Women's Collection */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/womens" style={{ color: "#333" }}>
                       <GiClothes size={18} className="me-1" /> Women
                     </NavLink>
                   </li>
 
-                  {/* 👶 Kids */}
+                  {/* 🔹 Kids */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/kids" style={{ color: "#333" }}>
                       <GiKidneys size={18} className="me-1" /> Kids
                     </NavLink>
                   </li>
 
-                  {/* 🏠 Household */}
+                  {/* 🔹 Household */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/household" style={{ color: "#333" }}>
                       <GiFamilyHouse size={18} className="me-1" /> Household
                     </NavLink>
                   </li>
 
-                  {/* 👕 Clothes */}
+                  {/* 🔹 Clothes */}
                   <li className="nav-item">
                     <NavLink className="nav-link fw-bold" to="/clothes" style={{ color: "#333" }}>
                       <GiClothes size={18} className="me-1" /> Clothes
