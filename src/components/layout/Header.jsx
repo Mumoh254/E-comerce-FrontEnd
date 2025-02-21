@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { FaShoppingCart, FaSignInAlt, FaUserPlus, FaThList } from "react-icons/fa"; // Added FaThList for Categories
+import { FaShoppingCart, FaSignInAlt, FaUserPlus, FaThList } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 import { GiClothes, GiRunningShoe, GiKidneys, GiFamilyHouse } from "react-icons/gi";
 
@@ -66,7 +66,7 @@ const Header = () => {
             </div>
 
             {/* 🔹 Cart, Login, Sign Up */}
-            <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-3">
+            <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-4">
               {/* 🔹 Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
                 <FaShoppingCart size={22} style={{ color: "#6B5B95" }} />
@@ -139,21 +139,42 @@ const Header = () => {
                 <ul className="navbar-nav mx-auto gap-3">
                   {/* 🔹 Categories */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold d-flex align-items-center" to="/categories" style={{ color: "#333" }}>
-                      <FaThList size={18} className="me-1" /> Categories
+                    <NavLink
+                      className="nav-link fw-bold d-flex align-items-center"
+                      to="/categories"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
+                      <FaThList size={20} className="me-1" /> Categories
                     </NavLink>
                   </li>
 
                   {/* 🔹 Home */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       Home
                     </NavLink>
                   </li>
 
                   {/* 🔹 Shop */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/shop" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/shop"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       Shop
                     </NavLink>
                   </li>
@@ -163,7 +184,14 @@ const Header = () => {
                     <NavLink
                       className="nav-link fw-bold"
                       to="/hotdeals"
-                      style={{ background: "linear-gradient(45deg, #FF6B6B, #FFD166)", WebkitBackgroundClip: "text", color: "transparent" }}
+                      style={({ isActive }) => ({
+                        background: isActive
+                          ? "linear-gradient(45deg, #FF6B6B, #FFD166)"
+                          : "linear-gradient(45deg, #FF6B6B, #FFD166)",
+                        WebkitBackgroundClip: "text",
+                        color: isActive ? "#FF6B6B" : "transparent",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
                     >
                       🔥 Hot Deals
                     </NavLink>
@@ -171,35 +199,70 @@ const Header = () => {
 
                   {/* 🔹 Sneakers */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/sneakers" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/sneakers"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       <GiRunningShoe size={18} className="me-1" /> Sneakers
                     </NavLink>
                   </li>
 
                   {/* 🔹 Women's Collection */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/womens" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/womens"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       <GiClothes size={18} className="me-1" /> Women
                     </NavLink>
                   </li>
 
                   {/* 🔹 Kids */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/kids" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/kids"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       <GiKidneys size={18} className="me-1" /> Kids
                     </NavLink>
                   </li>
 
                   {/* 🔹 Household */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/household" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/household"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       <GiFamilyHouse size={18} className="me-1" /> Household
                     </NavLink>
                   </li>
 
                   {/* 🔹 Clothes */}
                   <li className="nav-item">
-                    <NavLink className="nav-link fw-bold" to="/clothes" style={{ color: "#333" }}>
+                    <NavLink
+                      className="nav-link fw-bold"
+                      to="/clothes"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#FF6B6B" : "#333",
+                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                      })}
+                    >
                       <GiClothes size={18} className="me-1" /> Clothes
                     </NavLink>
                   </li>
