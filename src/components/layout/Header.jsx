@@ -19,12 +19,12 @@ const Header = () => {
       >
         <div className="container-xxl d-flex justify-content-between align-items-center">
           <p className="mb-0 fw-bold" style={{ fontSize: "12px" }}>
-            🔥 Exclusive Discounts
+            🔥 Exclusive Discounts @ MAJESTY COLECTIONS
           </p>
-          <p className="mb-0" style={{ fontSize: "12px" }}>
+          <p className="mb-0" style={{ fontSize: "14px" }}>
             Hotline:{" "}
-            <a className="fw-bold" href="tel:+254740045355" style={{ color: "var(--color-sample-3)", fontSize: "12px" }}>
-              +254 740 045 355
+            <a className="fw-bold  text-text-decoration-none" href="tel:+254740045355" style={{ color: "var(--color-sample-1)", fontSize: "14px" }}>
+               +254 740 045 355  |  +254740045355
             </a>
           </p>
         </div>
@@ -46,7 +46,7 @@ const Header = () => {
                     color: "transparent" 
                   }}
                 >
-                  <span className="majesty-logo">MAJESTY</span> COLLECTIONS
+                  <span className="majesty-logo  p-1 " style={{backgroundColor: "#FF5C00"  ,  color:"#fff"  }} >MAJESTY</span> COLLECTIONS
                 </Link>
               </h1>
             </div>
