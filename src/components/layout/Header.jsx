@@ -27,7 +27,7 @@ const Header = () => {
           <p className="mb-0" style={{ fontSize: "10px" }}>
             Hotline:{" "}
             <a className="fw-bold  text-text-decoration-none" href="tel:+254740045355" style={{ color: "var(--color-sample-1)", fontSize: "10px" }}>
-               +254740045355  
+               +254740045355  |
             </a>
           </p>
         </div>
