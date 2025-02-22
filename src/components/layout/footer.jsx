@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaThList, FaShoePrints, FaTshirt, FaChild, FaHome, FaFire } from "react-icons/fa";
-
+import { FaFacebookF, FaTwitter, FaInstagram, FaTiktok } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="footer">
@@ -25,7 +25,7 @@ export default function Footer() {
               <button
                 className="input-group-text fs-4"
                 style={{ 
-                  background: "linear-gradient(45deg, #6B5B95, #A593E0)", 
+                  background: " linear-gradient(135deg, #c20030, #a00028)", 
                   border: "none", 
                   color: "#fff", 
                   borderRadius: "0 4px 4px 0", // Rounded corners on the right side
@@ -68,18 +68,20 @@ export default function Footer() {
               <p>We are committed to bringing you the best in footwear. Our exclusive collection features top brands and the latest trends.</p>
             </div>
           </div>
+      
 
-          <div className="col-md-3 col-sm-6 mb-3">
-            <div className="footer-section social">
-              <h2 className="footer-title">Follow Us</h2>
-              <div className="social-icons">
-                <a href="#" className="social-icon"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" className="social-icon"><i className="fab fa-twitter"></i></a>
-                <a href="#" className="social-icon"><i className="fab fa-instagram"></i></a>
-                <a href="#" className="social-icon"><i className="fab fa-tiktok"></i></a>
-              </div>
-            </div>
-          </div>
+<div className="col-md-3 col-sm-6 mb-3">
+  <div className="footer-section social">
+    <h2 className="footer-title">Follow Us</h2>
+    <div className="social-icons">
+      <a href="#" className="social-icon px-2"><FaFacebookF size={20} color="#1877F2" /></a>
+      <a href="#" className="social-icon px-2"><FaTwitter size={20} color="#1DA1F2" /></a>
+      <a href="#" className="social-icon px-2"><FaInstagram size={20} color="#E4405F" /></a>
+      <a href="#" className="social-icon px-2"><FaTiktok size={20} color="#000" /></a>
+    </div>
+  </div>
+</div>
+
 
           <div className="col-md-3 col-sm-6 mb-3">
             <div className="footer-section location">
@@ -112,7 +114,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom mt-4">
-        <p>  | &copy; 2025 Majesty Collections Store | Privacy Policy | All Rights Reserved | Otherwise | protected by Welt Tallis  </p>
+        <p style={{color: "blue"}}>  | &copy; 2025 Majesty Collections Store | Privacy Policy | All Rights Reserved | Otherwise | protected by Welt Tallis  </p>
       </div>
     </footer>
   );
