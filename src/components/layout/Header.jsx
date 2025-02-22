@@ -13,7 +13,7 @@ const Header = () => {
       <header
         className="header-top-strip px-3 px-md-4 py-2"
         style={{
-          background: "linear-gradient(45deg, rgb(231, 8, 8), rgb(235, 182, 58))",
+          background: "var(--color-sample-4)",
           color: "#fff",
         }}
       >
@@ -23,7 +23,7 @@ const Header = () => {
           </p>
           <p className="mb-0" style={{ fontSize: "12px" }}>
             Hotline:{" "}
-            <a className="fw-bold" href="tel:+254740045355" style={{ color: "#6B5B95", fontSize: "12px" }}>
+            <a className="fw-bold" href="tel:+254740045355" style={{ color: "var(--color-sample-3)", fontSize: "12px" }}>
               +254 740 045 355
             </a>
           </p>
@@ -40,7 +40,11 @@ const Header = () => {
                 <Link
                   className="text-decoration-none fw-bold fs-4"
                   to="/"
-                  style={{ background: "linear-gradient(45deg, #6B5B95, #A593E0)", WebkitBackgroundClip: "text", color: "transparent" }}
+                  style={{ 
+                    background: "linear-gradient(45deg, var(--color-sample-3), var(--color-sample-4))", 
+                    WebkitBackgroundClip: "text", 
+                    color: "transparent" 
+                  }}
                 >
                   <span className="majesty-logo">MAJESTY</span> COLLECTIONS
                 </Link>
@@ -54,11 +58,15 @@ const Header = () => {
                   type="text"
                   className="form-control"
                   placeholder="Search for products..."
-                  style={{ outline: "none", border: "1px solid #6B5B95" }}
+                  style={{ outline: "none", border: "1px solid var(--color-sample-3)" }}
                 />
                 <span
                   className="input-group-text fs-4"
-                  style={{ background: "linear-gradient(45deg, #6B5B95, #A593E0)", border: "none", color: "#fff" }}
+                  style={{ 
+                    background: "linear-gradient(45deg, var(--color-sample-3), var(--color-sample-4))", 
+                    border: "none", 
+                    color: "#fff" 
+                  }}
                 >
                   <BiSearch />
                 </span>
@@ -69,14 +77,14 @@ const Header = () => {
             <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-4">
               {/* 🔹 Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
-                <FaShoppingCart size={22} style={{ color: "#6B5B95" }} />
+                <FaShoppingCart size={22} style={{ color: "var(--color-sample-3)" }} />
                 {/* 🔹 Cart Counter Badge */}
                 <span
                   style={{
                     position: "absolute",
                     top: "-8px",
                     right: "-8px",
-                    background: "linear-gradient(45deg, #FF6B6B, #FFD166)",
+                    background: "linear-gradient(45deg, var(--color-sample-2), var(--color-sample-1))",
                     color: "#fff",
                     borderRadius: "50%",
                     width: "20px",
@@ -90,23 +98,23 @@ const Header = () => {
                 >
                   {cartCount}
                 </span>
-                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "#6B5B95" }}>
+                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
                   Cart
                 </span>
               </Link>
 
               {/* 🔹 Login */}
               <Link to="/login" className="text-dark d-flex align-items-center">
-                <FaSignInAlt size={20} style={{ color: "#6B5B95" }} />
-                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "#6B5B95" }}>
+                <FaSignInAlt size={20} style={{ color: "var(--color-sample-3)" }} />
+                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
                   Login
                 </span>
               </Link>
 
               {/* 🔹 Sign Up */}
               <Link to="/signup" className="text-dark d-flex align-items-center">
-                <FaUserPlus size={20} style={{ color: "#6B5B95" }} />
-                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "#6B5B95" }}>
+                <FaUserPlus size={20} style={{ color: "var(--color-sample-3)" }} />
+                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
                   Sign Up
                 </span>
               </Link>
@@ -143,8 +151,8 @@ const Header = () => {
                       className="nav-link fw-bold d-flex align-items-center"
                       to="/categories"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <FaThList size={20} className="me-1" /> Categories
@@ -157,8 +165,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       Home
@@ -171,8 +179,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/shop"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       Shop
@@ -186,11 +194,11 @@ const Header = () => {
                       to="/hotdeals"
                       style={({ isActive }) => ({
                         background: isActive
-                          ? "linear-gradient(45deg, #FF6B6B, #FFD166)"
-                          : "linear-gradient(45deg, #FF6B6B, #FFD166)",
+                          ? "linear-gradient(45deg, var(--color-sample-2), var(--color-sample-1))"
+                          : "linear-gradient(45deg, var(--color-sample-2), var(--color-sample-1))",
                         WebkitBackgroundClip: "text",
-                        color: isActive ? "#FF6B6B" : "transparent",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "transparent",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       🔥 Hot Deals
@@ -203,8 +211,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/sneakers"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <GiRunningShoe size={18} className="me-1" /> Sneakers
@@ -217,8 +225,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/womens"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <GiClothes size={18} className="me-1" /> Women
@@ -231,8 +239,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/kids"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <GiKidneys size={18} className="me-1" /> Kids
@@ -245,8 +253,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/household"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <GiFamilyHouse size={18} className="me-1" /> Household
@@ -259,8 +267,8 @@ const Header = () => {
                       className="nav-link fw-bold"
                       to="/clothes"
                       style={({ isActive }) => ({
-                        color: isActive ? "#FF6B6B" : "#333",
-                        borderBottom: isActive ? "2px solid #FF6B6B" : "none",
+                        color: isActive ? "var(--color-sample-2)" : "#333",
+                        borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
                       <GiClothes size={18} className="me-1" /> Clothes

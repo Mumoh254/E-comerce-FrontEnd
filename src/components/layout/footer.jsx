@@ -5,7 +5,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="footer  p-4" style={{ background: "#f8f9fa", color: "#2c3e50", padding: "40px 0" }}>
+    <footer className="footer  p-4" style={{ background: "#f8f9fa", color: "#333", padding: "40px 0" }}>
       <div className="footer-container container  ">
         {/* 🔹 Newsletter Subscription */}
         <div className="row mb-5 ">

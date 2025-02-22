@@ -15,18 +15,20 @@
 
    /* new */
 
-   --color-sample-1: AEE553;
-   --color-sample-2:  FF5C00;
-   --color-sample-3:  CC00FF;
-   --color-sample-4:  8490FF;
+   --color-sample-1: #AEE553;
+   --color-sample-2:  #FF5C00;
+   --color-sample-3:  #CC00FF;
+   --color-sample-4:  #8490FF;
 }
 
 body{
-  font-family: "Rubik";
+  font-family: "Rubik" , sans-serif;
+ 
 }
 
 a{
   text-decoration: none;
+  color: var(--color-sample-2);
   
 }
 
@@ -73,6 +75,8 @@ a{
   }
   
 /* Custom styles for the home section */
+
+/* Custom styles for the home section */
 .home-wrapper-1 {
   background-color: #f8f9fa;
 }
@@ -93,6 +97,7 @@ a{
 .caption {
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
   border-radius: 0 0 8px 8px;
+  width: 100%;
 }
 
 .caption h4,
@@ -101,18 +106,31 @@ a{
   margin-bottom: 0.5rem;
 }
 
+.caption h4 {
+  font-size: 1.5rem;
+}
+
+.caption h5 {
+  font-size: 1.25rem;
+}
+
+.caption h6 {
+  font-size: 1rem;
+}
+
 .caption p {
   margin-bottom: 0.5rem;
+  font-size: 0.875rem;
 }
 
 .btn-primary {
-  background-color: #6B5B95;
+  background-color: var(--color-sample-2);
   border: none;
   transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #A593E0;
+  background-color: var(--color-sample-1);
 }
 
 /* Responsive adjustments */
@@ -125,12 +143,16 @@ a{
     font-size: 1.25rem;
   }
 
-  .caption h6 {
+  .caption h5 {
     font-size: 1rem;
   }
 
-  .caption p {
+  .caption h6 {
     font-size: 0.875rem;
+  }
+
+  .caption p {
+    font-size: 0.75rem;
   }
 
   .btn {
