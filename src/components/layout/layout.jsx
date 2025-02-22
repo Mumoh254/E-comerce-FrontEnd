@@ -3,11 +3,18 @@ import Header from "../layout/Header"; // Ensure it's correctly imported
 import Footer from "../layout/footer"; // Ensure it's correctly imported
 import React from "react";
 
-export default function Layout() {  // Capitalized 'Layout'
+export default function Layout() {
   return (
     <div>
+      {/* 🔹 Header */}
       <Header />
-      <Outlet />
+
+      {/* 🔹 Main Content */}
+      <main className="container my-4">
+        <Outlet />
+      </main>
+
+      {/* 🔹 Footer */}
       <Footer />
     </div>
   );

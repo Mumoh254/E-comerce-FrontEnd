@@ -1,3 +1,6 @@
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../src/components/pages/home'
 import Layout from './components/layout/layout' 
@@ -14,7 +17,7 @@ function App() {
           <Route index element={<Home />} /> 
           <Route path='/about' element={<About />} /> 
           <Route path='/contacts' element={<Contact />} /> 
-          <Route index element={<Home />} /> 
+        
 
         </Route>
       </Routes>

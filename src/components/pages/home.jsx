@@ -78,7 +78,7 @@ const Home = () => {
         <div className="container">
           <h2 className="text-center mb-5 fw-bold">Featured Products</h2>
           <div className="row g-4">
-            {/* 🔹 Product 1 */}
+            {/* 🔹 Produ1ct 1 */}
             <div className="col-md-4">
               <div className="card">
                 <img
@@ -135,12 +135,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 🔹 Footer Section */}
-      <footer className="footer-section py-4 bg-dark text-white">
-        <div className="container text-center">
-          <p className="mb-0">&copy; 2023 Majesty Collections. All rights reserved.</p>
-        </div>
-      </footer>
+    
     </div>
   );
 };
