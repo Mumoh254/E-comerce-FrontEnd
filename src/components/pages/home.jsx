@@ -111,7 +111,7 @@ export default function Home() {
                       <p>{category.items} items</p>
                     </div>
                     <div className="col-6 text-end">
-                      <img src="public/images/gal.png" className="img-fluid" alt={category.name} />
+                      <img src="/images/gal.png" className="img-fluid" alt={category.name} />
                     </div>
                   </div>
                 </div>
