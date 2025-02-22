@@ -15,16 +15,19 @@ const Header = () => {
         style={{
           background: "var(--color-sample-4)",
           color: "#fff",
+          position:  "sticky",
+          top: 0,
+          zIndex: 200
         }}
       >
         <div className="container-xxl d-flex justify-content-between align-items-center">
           <p className="mb-0 fw-bold" style={{ fontSize: "10px" }}>
-            🔥 Exclusive Discounts @ MAJESTY COLECTIONS
+            🔥Big  Discounts @ Majesty Collections
           </p>
           <p className="mb-0" style={{ fontSize: "10px" }}>
             Hotline:{" "}
             <a className="fw-bold  text-text-decoration-none" href="tel:+254740045355" style={{ color: "var(--color-sample-1)", fontSize: "10px" }}>
-               +254 740 045 355  |  +254740045355
+               +254740045355  | +254740045355
             </a>
           </p>
         </div>
