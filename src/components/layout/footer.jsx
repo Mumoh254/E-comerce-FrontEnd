@@ -5,11 +5,11 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="footer" style={{ background: "#f8f9fa", color: "#2c3e50", padding: "40px 0" }}>
-      <div className="footer-container container">
+    <footer className="footer  p-4" style={{ background: "#f8f9fa", color: "#2c3e50", padding: "40px 0" }}>
+      <div className="footer-container container  ">
         {/* 🔹 Newsletter Subscription */}
-        <div className="row mb-5">
-          <div className="col-12">
+        <div className="row mb-5 ">
+          <div className="col-12  ">
             <div className="input-group" style={{ display: "flex", alignItems: "stretch", maxWidth: "600px", margin: "0 auto" }}>
               <input
                 type="email"
@@ -80,12 +80,12 @@ export default function Footer() {
             <div className="footer-section">
               <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "#6B5B95" }}>Quick Links</h2>
               <ul style={{ listStyle: "none", padding: "0" }}>
-                <li><NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Sneakers</NavLink></li>
-                <li><NavLink to="/womens" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Women's Collection</NavLink></li>
-                <li><NavLink to="/kids" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Kids</NavLink></li>
-                <li><NavLink to="/household" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Household</NavLink></li>
-                <li><NavLink to="/clothes" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Clothes</NavLink></li>
-                <li><NavLink to="/hotdeals" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px" }}>Hot Deals</NavLink></li>
+                <li><NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Sneakers</NavLink></li>
+                <li><NavLink to="/womens" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Women's Collection</NavLink></li>
+                <li><NavLink to="/kids" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Kids</NavLink></li>
+                <li><NavLink to="/household" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Household</NavLink></li>
+                <li><NavLink to="/clothes" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Clothes</NavLink></li>
+                <li><NavLink to="/hotdeals" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Hot Deals</NavLink></li>
               </ul>
             </div>
           </div>
@@ -96,33 +96,33 @@ export default function Footer() {
               <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "#6B5B95" }}>Categories</h2>
               <ul style={{ listStyle: "none", padding: "0" }}>
                 <li>
-                  <NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaShoePrints className="me-2" /> Sneakers
+                  <NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaShoePrints className="me-2" style={{ fontSize: "1.2rem" }} /> Sneakers
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/womens" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaTshirt className="me-2" /> Women's Collection
+                  <NavLink to="/womens" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaTshirt className="me-2" style={{ fontSize: "1.2rem" }} /> Women's Collection
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/kids" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaChild className="me-2" /> Kids
+                  <NavLink to="/kids" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaChild className="me-2" style={{ fontSize: "1.2rem" }} /> Kids
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/household" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaHome className="me-2" /> Household
+                  <NavLink to="/household" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaHome className="me-2" style={{ fontSize: "1.2rem" }} /> Household
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/clothes" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaTshirt className="me-2" /> Clothes
+                  <NavLink to="/clothes" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaTshirt className="me-2" style={{ fontSize: "1.2rem" }} /> Clothes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/hotdeals" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px" }}>
-                    <FaFire className="me-2 text-danger" /> Hot Deals
+                  <NavLink to="/hotdeals" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>
+                    <FaFire className="me-2 text-danger" style={{ fontSize: "1.2rem" }} /> Hot Deals
                   </NavLink>
                 </li>
               </ul>
@@ -134,17 +134,17 @@ export default function Footer() {
             <div className="footer-section">
               <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "#6B5B95" }}>Follow Us</h2>
               <div className="social-icons">
-                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px" }}>
-                  <FaFacebookF size={20} color="#1877F2" style={{ marginRight: "10px" }} /> Facebook
+                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px", fontSize: "1rem" }}>
+                  <FaFacebookF size={24} color="#1877F2" style={{ marginRight: "10px" }} /> Facebook
                 </a>
-                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px" }}>
-                  <FaTwitter size={20} color="#1DA1F2" style={{ marginRight: "10px" }} /> Twitter
+                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px", fontSize: "1rem" }}>
+                  <FaTwitter size={24} color="#1DA1F2" style={{ marginRight: "10px" }} /> Twitter
                 </a>
-                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px" }}>
-                  <FaInstagram size={20} color="#E4405F" style={{ marginRight: "10px" }} /> Instagram
+                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px", fontSize: "1rem" }}>
+                  <FaInstagram size={24} color="#E4405F" style={{ marginRight: "10px" }} /> Instagram
                 </a>
-                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px" }}>
-                  <FaTiktok size={20} color="#000" style={{ marginRight: "10px" }} /> TikTok
+                <a href="#" className="social-icon" style={{ display: "flex", alignItems: "center", color: "#2c3e50", textDecoration: "none", marginBottom: "10px", fontSize: "1rem" }}>
+                  <FaTiktok size={24} color="#000" style={{ marginRight: "10px" }} /> TikTok
                 </a>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function Footer() {
 
       {/* Footer Bottom */}
       <div className="footer-bottom mt-5" style={{ borderTop: "1px solid #6B5B95", paddingTop: "20px", textAlign: "center" }}>
-        <p style={{ color: "#2c3e50", margin: "0" }}>
+        <p style={{ color: "#2c3e50", margin: "0", fontSize: "1rem" }}>
           &copy; 2025 Majesty Collections Store | Privacy Policy | All Rights Reserved | Protected by Welt Tallis
         </p>
       </div>
