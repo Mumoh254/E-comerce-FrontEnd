@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaThList } from 'react-icons/fa';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { FaThList, FaShoePrints, FaTshirt, FaChild, FaHome, FaFire } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -44,12 +44,12 @@ export default function Footer() {
               <FaThList size={18} className="me-1" /> Categories
             </button>
             <ul className="dropdown-menu">
-              <li><NavLink className="dropdown-item" to="/sneakers">Sneakers</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/womens">Women's Collection</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/kids">Kids</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/household">Household</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/clothes">Clothes</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/hotdeals">🔥 Hot Deals</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/sneakers"><FaShoePrints className="me-2" /> Sneakers</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/womens"><FaTshirt className="me-2" /> Women's Collection</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/kids"><FaChild className="me-2" /> Kids</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/household"><FaHome className="me-2" /> Household</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/clothes"><FaTshirt className="me-2" /> Clothes</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/hotdeals"><FaFire className="me-2 text-danger" /> Hot Deals</NavLink></li>
             </ul>
           </div>
         </div>
