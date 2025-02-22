@@ -5,9 +5,10 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="footer p-4" style={{ background: "#f8f9fa", color: "#333", padding: "40px 0" }}>
+    <footer className="footer p-4 font" style={{ background: "#f8f9fa", color: "#333", padding: "40px 0" }}>
       <div className="footer-container container">
-        {/* 🔹 Newsletter Subscription */}
+
+        {/* Newsletter Subscription */}
         <div className="row mb-5">
           <div className="col-12">
             <div className="input-group" style={{ display: "flex", alignItems: "stretch", maxWidth: "600px", margin: "0 auto" }}>
@@ -47,7 +48,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 🔹 Map */}
+        {/*  Map    to  majesty */}
         <div className="row mb-5">
           <div className="col-12">
             <div className="map-container" style={{ borderRadius: "8px", overflow: "hidden" }}>
@@ -65,13 +66,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Rest of the content */}
+
         <div className="row">
           {/* About Us */}
           <div className="col-md-3 col-sm-6 mb-4">
             <div className="footer-section">
               <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "var(--color-sample-3)" }}>About Us</h2>
-              <p style={{ color: "#2c3e50", lineHeight: "1.8" }}>We are committed to bringing you the best in footwear. Our exclusive collection features top brands and the latest trends.</p>
+              <p style={{ color: "#2c3e50", lineHeight: "1.8"   , fontWeight: "500"}}>We are committed to bringing you the best in footwear. Our exclusive collection features top brands and the latest trends.</p>
             </div>
           </div>
 
@@ -79,8 +80,8 @@ export default function Footer() {
           <div className="col-md-3 col-sm-6 mb-4">
             <div className="footer-section">
               <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "var(--color-sample-3)" }}>Quick Links</h2>
-              <ul style={{ listStyle: "none", padding: "0" }}>
-                <li><NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Sneakers</NavLink></li>
+              <ul style={{ listStyle: "none", padding: "0" ,  fontWeight: "500"}}>
+                <li><NavLink to="/sneakers" style={{ color: "#2c3e50", fontWeight: "500" ,  textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Sneakers</NavLink></li>
                 <li><NavLink to="/womens" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Women's Collection</NavLink></li>
                 <li><NavLink to="/kids" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Kids</NavLink></li>
                 <li><NavLink to="/household" style={{ color: "#2c3e50", textDecoration: "none", display: "block", marginBottom: "10px", fontSize: "1rem" }}>Household</NavLink></li>
@@ -93,7 +94,7 @@ export default function Footer() {
           {/* Categories */}
           <div className="col-md-3 col-sm-6 mb-4">
             <div className="footer-section">
-              <h2 className="footer-title" style={{ fontSize: "1.5rem", marginBottom: "20px", color: "var(--color-sample-3)" }}>Categories</h2>
+              <h2 className="footer-title" style={{ fontSize: "1.5rem",  fontWeight: "500", marginBottom: "20px", color: "var(--color-sample-3)" }}>Categories</h2>
               <ul style={{ listStyle: "none", padding: "0" }}>
                 <li>
                   <NavLink to="/sneakers" style={{ color: "#2c3e50", textDecoration: "none", display: "flex", alignItems: "center", marginBottom: "10px", fontSize: "1rem" }}>

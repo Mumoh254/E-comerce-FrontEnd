@@ -49,13 +49,14 @@ a{
 
 /*   start  footer */
 
+footer{
 
+}
 
 /* end  footer */
 
 
 /* home  start */
-
 /* Custom styles for the home section */
 .home-wrapper-1 {
   background-color: #f8f9fa;
@@ -126,7 +127,7 @@ a{
   }
 
   .caption h6 {
-    font-size: 1.25rem; /* Larger text for small banners on mobile */
+    font-size: 1rem; /* Larger text for small banners on mobile */
   }
 
   .caption p {
@@ -136,6 +137,21 @@ a{
   .btn {
     font-size: 1rem; /* Larger button text for better visibility */
     padding: 10px 20px; /* Larger button size */
+  }
+}
+
+@media (max-width: 576px) {
+  .caption h6 {
+    font-size: 0.875rem; /* Smaller text for very small screens */
+  }
+
+  .caption p {
+    font-size: 0.75rem; /* Smaller text for very small screens */
+  }
+
+  .btn {
+    font-size: 0.875rem; /* Smaller button text for very small screens */
+    padding: 8px 16px; /* Smaller button size */
   }
 }
 /* home  end  */
