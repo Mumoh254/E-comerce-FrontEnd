@@ -1,6 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom"; // If using React Router
-import Services from "../pages/services"; // Corrected import
+import Services from "../pages/services"; // Import the Services component
+import Categories from "../pages/category"; // Import the Categories component
+
+// Define or import the Categories data
+const categoriesData = [
+  {
+    name: "Sneakers",
+    items: 120,
+    img: "/images/categories/sneakers.jpg",
+  },
+  {
+    name: "Women's Collection",
+    items: 80,
+    img: "/images/categories/womens.jpg",
+  },
+  {
+    name: "Kids",
+    items: 60,
+    img: "/images/categories/kids.jpg",
+  },
+  {
+    name: "Household",
+    items: 50,
+    img: "/images/categories/household.jpg",
+  },
+];
 
 export default function Home() {
   return (
@@ -74,13 +99,34 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Services Section */}
-        <div className="service-container py-5">
+        {/* Categories Section */}
+        <div className="home-wrapper py-5">
           <div className="container-xxl">
-            <Services />
+            <div className="row">
+              {categoriesData.map((category, index) => (
+                <div key={index} className="col-md-6 mb-3">
+                  <div className="row align-items-center categories p-3 border rounded">
+                    <div className="col-6">
+                      <h6>{category.name}</h6>
+                      <p>{category.items} items</p>
+                    </div>
+                    <div className="col-6 text-end">
+                      <img src="public/images/gal.png" className="img-fluid" alt={category.name} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Services Section */}
+      <div className="service-container py-5">
+        <div className="container-xxl">
+          <Services />
+        </div>
+      </div>
     </>
   );
 }
