@@ -16,11 +16,11 @@ export default function Home() {
                   src="/images/banner1.png"
                   alt="Main banner image for shoes Majesty Collections"
                 />
-                <div className="caption position-absolute start-0 bottom-0 w-100 p-3 p-md-4 text-white d-flex flex-column align-items-center align-items-md-start text-center text-md-start">
-                  <h4>🔥 Step into Style! 🔥</h4>
-                  <h5>Trendy Shoes Starting at Ksh 1000</h5>
-                  <p>Unbeatable Deals from Ksh 200</p>
-                  <Link to="/shop" className="btn btn-primary" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
+                <div className="caption position-absolute start-0 bottom-0 w-100 p-3 p-md-4 text-white d-flex flex-column align-items-start">
+                  <h4 className="mb-2">🔥 Step into Style! 🔥</h4>
+                  <h5 className="mb-2">Trendy Shoes Starting at Ksh 1000</h5>
+                  <p className="mb-3">Unbeatable Deals from Ksh 200</p>
+                  <Link to="/shop" className="btn btn-primary btn-lg" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
                     Shop Now
                   </Link>
                 </div>
@@ -39,10 +39,11 @@ export default function Home() {
                       alt="Small banner image for shoes Majesty Collections"
                       style={{ objectFit: 'cover' }}
                     />
-                    <div className="caption position-absolute start-0 bottom-0 w-100 p-2 p-md-3 text-white d-flex flex-column align-items-center text-center">
-                      <h6>💯 Elevate Your Look</h6>
-                      <p>Premium Shoes, Affordable Prices</p>
-                      <Link to="/shop" className="btn btn-sm btn-primary" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
+                    <div className="caption position-absolute start-0 bottom-0 w-100 p-2 p-md-3 text-white d-flex flex-column align-items-start">
+                      <h6 className="mb-1">💯 Elevate Your Look</h6>
+                      <p className="mb-2">Discover our premium collection of shoes designed for comfort and style.</p>
+                      <p className="mb-3">Starting at Ksh 1500</p>
+                      <Link to="/shop" className="btn btn-primary btn-lg" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
                         Shop Now
                       </Link>
                     </div>
@@ -58,10 +59,11 @@ export default function Home() {
                       alt="Small banner image for shoes Majesty Collections"
                       style={{ objectFit: 'cover' }}
                     />
-                    <div className="caption position-absolute start-0 bottom-0 w-100 p-2 p-md-3 text-white d-flex flex-column align-items-center text-center">
-                      <h6>⚡ Limited-Time Offers! ⚡</h6>
-                      <p>Grab Yours Before They're Gone!</p>
-                      <Link to="/shop" className="btn btn-sm btn-primary" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
+                    <div className="caption position-absolute start-0 bottom-0 w-100 p-2 p-md-3 text-white d-flex flex-column align-items-start">
+                      <h6 className="mb-1">⚡ Limited-Time Offers! ⚡</h6>
+                      <p className="mb-2">Don't miss out on our exclusive deals. Shop now and save big!</p>
+                      <p className="mb-3">Discounts up to 50%</p>
+                      <Link to="/shop" className="btn btn-primary btn-lg" style={{ backgroundColor: "var(--color-sample-2)", border: "none" }}>
                         Shop Now
                       </Link>
                     </div>

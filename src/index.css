@@ -55,26 +55,6 @@ a{
 
 
 /* home  start */
-.caption{
-  top:  10%;
-  
-}
-
-
-  .btn {
-    background: #6B5B95; 
-    border: none; 
-    color: #fff; 
-    border-radius: 0 4px 4px 0; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 30px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-/* Custom styles for the home section */
 
 /* Custom styles for the home section */
 .home-wrapper-1 {
@@ -103,7 +83,6 @@ a{
 .caption h4,
 .caption h6 {
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 .caption h4 {
@@ -119,7 +98,6 @@ a{
 }
 
 .caption p {
-  margin-bottom: 0.5rem;
   font-size: 0.875rem;
 }
 
@@ -148,16 +126,16 @@ a{
   }
 
   .caption h6 {
-    font-size: 0.875rem;
+    font-size: 1.25rem; /* Larger text for small banners on mobile */
   }
 
   .caption p {
-    font-size: 0.75rem;
+    font-size: 0.875rem; /* Slightly larger text for better readability */
   }
 
   .btn {
-    font-size: 0.875rem;
-    padding: 5px 10px;
+    font-size: 1rem; /* Larger button text for better visibility */
+    padding: 10px 20px; /* Larger button size */
   }
 }
 /* home  end  */
