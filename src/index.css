@@ -12,6 +12,13 @@
    --pink-color:  #6B5B95;
    --bg-grad: linear-gradient(45deg, rgb(223 0 0), rgb(121 6 0));
 
+
+   /* new */
+
+   --color-sample-1: AEE553;
+   --color-sample-2:  FF5C00;
+   --color-sample-3:  CC00FF;
+   --color-sample-4:  8490FF;
 }
 
 body{
@@ -43,3 +50,92 @@ a{
 
 
 /* end  footer */
+
+
+/* home  start */
+.caption{
+  top:  10%;
+  
+}
+
+
+  .btn {
+    background: #6B5B95; 
+    border: none; 
+    color: #fff; 
+    border-radius: 0 4px 4px 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+/* Custom styles for the home section */
+.home-wrapper-1 {
+  background-color: #f8f9fa;
+}
+
+.main-banner-context,
+.small-banner-context {
+  position: relative;
+}
+
+.main-banner-context img,
+.small-banner-context img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.caption {
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+  border-radius: 0 0 8px 8px;
+}
+
+.caption h4,
+.caption h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.caption p {
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #6B5B95;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #A593E0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .caption {
+    padding: 10px !important;
+  }
+
+  .caption h4 {
+    font-size: 1.25rem;
+  }
+
+  .caption h6 {
+    font-size: 1rem;
+  }
+
+  .caption p {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 5px 10px;
+  }
+}
+/* home  end  */
