@@ -180,13 +180,13 @@ const Header = () => {
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
-                      to="/shop"
+                      to="/store"
                       style={({ isActive }) => ({
                         color: isActive ? "var(--color-sample-2)" : "#333",
                         borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
-                      Shop
+                      Store
                     </NavLink>
                   </li>
 

@@ -7,7 +7,7 @@ import Layout from './components/layout/layout'
 
 import   Contact   from  '../src/components/pages/contact'
 import   About    from   '../src/components/pages/about'
-
+import Store from './components/pages/store';
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +17,8 @@ function App() {
           <Route index element={<Home />} /> 
           <Route path='/about' element={<About />} /> 
           <Route path='/contacts' element={<Contact />} /> 
+          <Route  path="/store"  element={<Store />} />
+          <Route  path="/signup"  element={<Register />} />
         
 
         </Route>
