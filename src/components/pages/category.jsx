@@ -6,7 +6,7 @@ export default function Categories() {
 
   // API Call
   useEffect(() => {
-    fetch("https://your-api-endpoint.com/categories") // Replace with your API URL
+    fetch("https://your-api-endpoint.com/categories") // Replace with your actual API URL
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);
@@ -21,33 +21,31 @@ export default function Categories() {
   return (
     <div className="home-wrapper py-5">
       <div className="container-xxl">
-        <div className="row g-3"> {/* Add spacing between rows and columns */}
+        <div className="row g-4"> {/* Adds uniform spacing between rows/columns */}
           {loading ? (
             <div className="col-12 text-center">
-              <p>Loading categories...</p>
+              <p className="fw-bold text-muted">Loading categories...</p>
             </div>
           ) : categories.length > 0 ? (
             categories.map((category, index) => (
-              <div key={index} className="col-md-6">
-                <div className="h-100 p-3 border rounded d-flex flex-column justify-content-between"> {/* Ensure consistent height and flex layout */}
+              <div key={index} className="col-md-6 col-lg-4"> {/* Adjusts layout for different screen sizes */}
+                <div className="category-card p-3 border rounded d-flex align-items-center justify-content-between">
                   <div>
-                    <h6 className="mb-2">{category.name}</h6>
-                    <p className="mb-0">{category.items} items</p>
+                    <h6 className="mb-1 fw-semibold">{category.name}</h6>
+                    <p className="text-muted">{category.items} items</p>
                   </div>
-                  <div className="text-end">
-                    <img
-                      src={category.img}
-                      className="img-fluid"
-                      alt={category.name}
-                      style={{ width: "30px" }}
-                    />
-                  </div>
+                  <img
+                    src={category.img}
+                    className="img-fluid rounded"
+                    alt={category.name}
+                    style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                  />
                 </div>
               </div>
             ))
           ) : (
             <div className="col-12 text-center">
-              <p>No categories available.</p>
+              <p className="fw-bold text-danger">No categories available.</p>
             </div>
           )}
         </div>

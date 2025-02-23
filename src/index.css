@@ -158,25 +158,37 @@ footer{
 
 
 /* category  start */
-
-.category-row{
-  background-color:   var(--pink-color);
+.category-row {
+  background-color: var(--pink-color);
   padding: 10px;
- row-gap: 20px !important;
- flex-wrap: wrap;
-  display: flex  !important;
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 20px !important; /* Replaces row-gap for better consistency */
   justify-content: space-between !important;
-
 }
 
-.category-col{
+.category-col {
   background-color: #d8ddd0;
-  padding: 10px;
-  margin-left: 20px;
-  border:   1px  solid  #333;
+  padding: 15px; /* Increased for better spacing */
+  margin: 10px; /* Changed from margin-left to margin for better alignment */
+  border: 1px solid #333;
+  border-radius: 8px; /* Adds slight rounding for a modern look */
+  flex: 1 1 calc(50% - 20px); /* Ensures 2 per row dynamically */
+  max-width: calc(50% - 20px); /* Prevents excessive width */
 }
-.category-col  img  {
+
+.category-col img {
+  width: 100%; /* Ensures full width inside the container */
+  height: 120px; /* Fixed height for consistency */
   object-fit: cover;
+  border-radius: 5px; /* Softens the image edges */
+}
+
+@media (max-width: 768px) {
+  .category-col {
+    flex: 1 1 100%; /* Makes it full-width on smaller screens */
+    max-width: 100%;
+  }
 }
 
 /* category  end  */

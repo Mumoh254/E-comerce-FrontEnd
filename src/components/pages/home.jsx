@@ -99,26 +99,32 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Categories Section */}
-        <div className="home-wrapper py-5">
-          <div className="container-xxl  category-xxl "  >
-            <div className="row category-row">
-              {categoriesData.map((category, index) => (
-                <div key={index} className="col category-col">
-                  <div className="row">
-                    <div className="col cat">
-                      <h6>{category.name}</h6>
-                      <p>{category.items} items</p>
-                    </div>
-                    <div className="col-6 text-end">
-                      <img src="images/gal.png" className="img-fluid" alt={category.name} style={{ width: '30px' }} />
-                    </div>
-                  </div>
-                </div>
-              ))}
+     {/* Categories Section */}
+<div className="home-wrapper py-5">
+  <div className="container-xxl category-xxl">
+    <div className="row category-row">
+      {categoriesData.map((category, index) => (
+        <div key={index} className="col-md-6 col-lg-4 category-col">
+          <div className="d-flex justify-content-between align-items-center p-3 border rounded">
+            <div>
+              <h6 className="mb-1">{category.name}</h6>
+              <p className="text-muted">{category.items} items</p>
             </div>
+            <img
+              src="images/gal.png"
+              className="img-fluid rounded"
+              alt={category.name}
+              style={{ width: "120px", height: "120px", objectFit: "cover" }}
+            />
           </div>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
       </section>
 
       {/* Services Section */}
