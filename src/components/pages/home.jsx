@@ -61,7 +61,7 @@ export default function Home() {
                     <h4 className="mb-2">🔥 Step into Style! 🔥</h4>
                     <h5 className="mb-2">Trendy Shoes Starting at Ksh 1000</h5>
                     <p className="mb-3">Unbeatable Deals from Ksh 200</p>
-                    <Link to="/shop" className="btn btn-lg shop-now-btn">
+                    <Link to="/store" className="btn btn-lg shop-now-btn">
                       Shop Now
                     </Link>
                   </div>
@@ -79,7 +79,7 @@ export default function Home() {
                     <h6 className="mb-1">💯 Elevate Your Look</h6>
                     <p className="mb-2">Discover our premium collection of shoes designed for comfort and style.</p>
                     <p className="mb-3">Starting at Ksh 1500</p>
-                    <Link to="/shop" className="btn btn-primary btn-lg shop-now-btn">
+                    <Link to="/store" className="btn btn-primary btn-lg shop-now-btn">
                       Shop Now
                     </Link>
                   </div>
@@ -97,7 +97,7 @@ export default function Home() {
                     <h6 className="mb-1">⚡ Limited-Time Offers! ⚡</h6>
                     <p className="mb-2">Don't miss out on our exclusive deals. Shop now and save big!</p>
                     <p className="mb-3">Discounts up to 50%</p>
-                    <Link to="/shop" className="btn btn-primary btn-lg shop-now-btn">
+                    <Link to="/store" className="btn btn-primary btn-lg shop-now-btn">
                       Shop Now
                     </Link>
                   </div>

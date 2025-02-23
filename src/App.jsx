@@ -9,7 +9,7 @@ import   Contact   from  '../src/components/pages/contact'
 import   About    from   '../src/components/pages/about'
 import Store from './components/pages/store';
 import  Register   from "./components/pages/register"
-import  Login    from  "./components/pages/Login"
+import  Login    from  "./components/pages/login"
 function App() {
   return (
     <BrowserRouter>
