@@ -76,7 +76,11 @@ footer{
   padding-right: 10px !important;
 }
 
-
+.btn{
+  border: none  !important;
+  outline: none  !important;
+  background-color: var(--color-sample-2)  !important;
+}
 .caption {
   margin-left: 20px !important;
 }

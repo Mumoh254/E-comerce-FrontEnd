@@ -81,7 +81,7 @@ export default function Home() {
                   <h4 className="mb-2">🔥 Step into Style! 🔥</h4>
                   <h5 className="mb-2">Trendy Shoes Starting at Ksh 1000</h5>
                   <p className="mb-3">Unbeatable Deals from Ksh 200</p>
-                  <Link to="/shop" className="btn btn-primary btn-lg shop-now-btn">
+                  <Link to="/shop" className="btn  btn-lg shop-now-btn">
                     Shop Now
                   </Link>
                 </div>
