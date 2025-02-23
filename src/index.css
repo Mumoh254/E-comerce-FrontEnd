@@ -78,6 +78,7 @@ footer{
 
 .btn{
   border: none  !important;
+  color:   #fff  !important;
   outline: none  !important;
   background-color: var(--color-sample-2)  !important;
 }
