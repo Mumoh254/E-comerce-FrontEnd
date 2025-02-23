@@ -9,6 +9,7 @@ import   Contact   from  '../src/components/pages/contact'
 import   About    from   '../src/components/pages/about'
 import Store from './components/pages/store';
 import  Register   from "./components/pages/register"
+import  Login    from  "./components/pages/Login"
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
           <Route  path="/store"  element={<Store />} />
           <Route  path="/contacts"  element={<Contact />} />
           <Route  path="/register"  element={<Register />} />
+          <Route  path="/login"  element={<Login />} />
        
         
 

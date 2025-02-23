@@ -78,10 +78,10 @@ const Header = () => {
 
             {/* 🔹 Cart, Login, Sign Up */}
             <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-4">
-              {/* 🔹 Cart */}
+              {/*  Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
                 <FaShoppingCart size={22} style={{ color: "var(--color-sample-3)" }} />
-                {/* 🔹 Cart Counter Badge */}
+                {/* Cart Counter Badge */}
                 <span
                   style={{
                     position: "absolute",
@@ -106,7 +106,7 @@ const Header = () => {
                 </span>
               </Link>
 
-              {/* 🔹 Login */}
+              {/*  Login */}
               <Link to="/login" className="text-dark d-flex align-items-center">
                 <FaSignInAlt size={20} style={{ color: "var(--color-sample-3)" }} />
                 <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
@@ -114,7 +114,7 @@ const Header = () => {
                 </span>
               </Link>
 
-              {/* 🔹 Sign Up */}
+              {/* ign Up */}
               <Link to="/register" className="text-dark d-flex align-items-center">
                 <FaUserPlus size={20} style={{ color: "var(--color-sample-3)" }} />
                 <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>

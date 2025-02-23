@@ -21,6 +21,16 @@
    --color-sample-4:  #8490FF;
 }
 
+.text-pink {
+  color:  #CC00FF;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.text-pink:hover{
+  color: #FF5C00;
+  transition: .3s  ease-in;
+}
 body{
   font-family: "Rubik" , sans-serif;
  
