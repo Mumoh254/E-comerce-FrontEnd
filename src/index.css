@@ -57,30 +57,34 @@ footer{
 
 
 /* home  start */
-
 .small-banner-context img {
-  margin-right: 20px  !important;
+  margin-right: 20px !important;
   margin-left: 10px !important;
-  width: 100%  !important;
-  height: 250px !important; /* Set a fixed height */
-  object-fit: cover  !important; /* Ensures the image scales properly */
+  width: 100% !important;
+  height: 250px !important;
+  object-fit: cover !important;
 }
 
-
 .small-banner-context {
-
-  margin-right: 10px   !important;  /* Adjust the spacing */
+  margin-left: 10px !important;
+}
+.small-banner-context:first-child {
+  padding-left: 10px !important;
 }
 
 .small-banner-context:last-child {
-  margin-right: 0; /* Avoid extra space on the last slide */
+  padding-right: 10px !important;
 }
 
 
-/* Custom styles for the home section */
+.caption {
+  margin-left: 20px !important;
+}
+
 .home-wrapper-1 {
   background-color: #f8f9fa;
 }
+
 
 .main-banner-context,
 .small-banner-context {

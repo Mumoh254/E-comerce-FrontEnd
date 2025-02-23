@@ -64,7 +64,7 @@ const carouselSettings = {
 export default function Home() {
   return (
     <>
-      <section className="home-wrapper-1 py-5">
+      <section className="home-wrapper-1 py-5  gap-2">
       <div className="container-xxl">
         {/* Carousel for Mobile Devices */}
         <div className="d-block d-md-none  ">
@@ -72,7 +72,7 @@ export default function Home() {
             {/* Main Banner */}
             <div>
               <div className="main-banner-context position-relative ">
-                <img   style={{height:  "250px"   ,  backgroundColor: "red" }}
+                <img   style={{height:  "250px"  }}
                   className="img-fluid rounded-3 "
                   src="/images/banner1.png"
                   alt="Main banner image for shoes Majesty Collections"
