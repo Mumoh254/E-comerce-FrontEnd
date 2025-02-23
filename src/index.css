@@ -57,6 +57,26 @@ footer{
 
 
 /* home  start */
+
+.small-banner-context img {
+  margin-right: 20px  !important;
+  margin-left: 10px !important;
+  width: 100%  !important;
+  height: 250px !important; /* Set a fixed height */
+  object-fit: cover  !important; /* Ensures the image scales properly */
+}
+
+
+.small-banner-context {
+
+  margin-right: 10px   !important;  /* Adjust the spacing */
+}
+
+.small-banner-context:last-child {
+  margin-right: 0; /* Avoid extra space on the last slide */
+}
+
+
 /* Custom styles for the home section */
 .home-wrapper-1 {
   background-color: #f8f9fa;
