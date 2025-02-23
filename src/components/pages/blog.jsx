@@ -11,29 +11,29 @@ export default function Blog() {
       id: 1,
       title: "Top 5 Sneaker Trends for 2024",
       description: "Discover the hottest sneaker trends for 2024, from chunky soles to retro designs. Stay ahead of the fashion curve!",
-      image: "/images/blogs/sneaker1.png",
-      link: "/images/blogs/sneaker1.png",
+      image: "images/blogs/sneaker1.png",
+      link: "images/blogs/sneaker1.png",
     },
     {
       id: 2,
       title: "How to Style Your Wardrobe for Summer",
       description: "Learn how to create stylish summer outfits with the latest clothing trends. Perfect for any occasion!",
-      image: "/images/blogs/sneaker2.png",
-      link: "/images/blogs/sneaker2.png",
+      image: "images/blogs/sneaker2.png",
+      link: "images/blogs/sneaker2.png",
     },
     {
       id: 3,
       title: "The Best Running Shoes for Marathon Runners",
       description: "Find out which running shoes are best for marathon runners, offering comfort, support, and durability.",
-      image: "/images/blogs/puma.png",
-      link: "/images/blogs/puma.png",
+      image: "images/blogs/puma.png",
+      link: "images/blogs/puma.png",
     },
     {
       id: 4,
       title: "Sustainable Fashion: Eco-Friendly Clothing Brands",
       description: "Explore eco-friendly clothing brands that are making a difference in the fashion industry with sustainable practices.",
-      image: "/images/blogs/laddiesboots.png", // Fixed path from /blogs/ to /blog/
-      link: "/images/blogs/laddiesboots.png",
+      image: "images/blogs/laddiesboots.png", // Fixed path from /blogs/ to /blog/
+      link: "images/blogs/laddiesboots.png",
     },
   ];
 
