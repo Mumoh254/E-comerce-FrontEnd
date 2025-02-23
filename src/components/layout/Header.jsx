@@ -115,7 +115,7 @@ const Header = () => {
               </Link>
 
               {/* 🔹 Sign Up */}
-              <Link to="/signup" className="text-dark d-flex align-items-center">
+              <Link to="/register" className="text-dark d-flex align-items-center">
                 <FaUserPlus size={20} style={{ color: "var(--color-sample-3)" }} />
                 <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
                   Sign Up
@@ -194,7 +194,7 @@ const Header = () => {
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
-                      to="/hotdeals"
+                      to="/contacts"
                       style={({ isActive }) => ({
                         background: isActive
                           ? "linear-gradient(45deg, var(--color-sample-2), var(--color-sample-1))"
@@ -204,7 +204,7 @@ const Header = () => {
                         borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
                       })}
                     >
-                      🔥 Hot Deals
+                      📞 Contacts 
                     </NavLink>
                   </li>
 
