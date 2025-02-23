@@ -6,7 +6,7 @@ import Blog from "./blog"; // Import the Blog component
 import { Swiper, SwiperSlide } from "swiper/react";
 import {  Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
+
 import "swiper/css/pagination";
 
 // Define or import the Categories data
@@ -41,7 +41,7 @@ export default function Home() {
           {/* SwiperJS for Mobile View */}
           <div className="d-block d-md-none">
             <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
+              modules={[Pagination, Autoplay]}
               spaceBetween={10}
               slidesPerView={1}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
