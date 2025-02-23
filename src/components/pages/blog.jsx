@@ -39,6 +39,7 @@ export default function Blog() {
 
   return (
     <div className="blog-wrapper py-5">
+      
       <div className="container-xxl">
         <h2 className="text-center mb-5">Latest Blog Posts</h2>
 
@@ -48,7 +49,7 @@ export default function Blog() {
             modules={[ Pagination, Autoplay]}
             spaceBetween={10}
             slidesPerView={1}
-            autoplay={{ delay: 3000 }}
+            autoplay={{ delay: 6000 }}
             pagination={{ clickable: true }}
             
           >

@@ -6,6 +6,7 @@ import Blog from "./blog"; // Import the Blog component
 import { Swiper, SwiperSlide } from "swiper/react";
 import {  Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
+import Products from "../productCards";
 
 import "swiper/css/pagination";
 
@@ -44,7 +45,7 @@ export default function Home() {
               modules={[Pagination, Autoplay]}
               spaceBetween={10}
               slidesPerView={1}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
               pagination={{ clickable: true }}
               
             >
@@ -168,6 +169,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+
+<Products />
+        
 
         {/* Blog Section */}
         <div className="container-xxl py-5">
