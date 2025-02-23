@@ -21,24 +21,25 @@ export default function Categories() {
   return (
     <div className="home-wrapper py-5">
       <div className="container-xxl">
-        <div className="row">
+        <div className="row g-3"> {/* Add spacing between rows and columns */}
           {loading ? (
             <div className="col-12 text-center">
               <p>Loading categories...</p>
             </div>
           ) : categories.length > 0 ? (
             categories.map((category, index) => (
-              <div key={index} className="col-md-6 mb-3">
-                <div className="row align-items-center categories p-3 justify-content-space-between border rounded">
-                  <div className="col-6">
-                    <h6>{category.name}</h6>
-                    <p>{category.items} items</p>
+              <div key={index} className="col-md-6">
+                <div className="h-100 p-3 border rounded d-flex flex-column justify-content-between"> {/* Ensure consistent height and flex layout */}
+                  <div>
+                    <h6 className="mb-2">{category.name}</h6>
+                    <p className="mb-0">{category.items} items</p>
                   </div>
-                  <div className="col-6 text-end">
+                  <div className="text-end">
                     <img
                       src={category.img}
                       className="img-fluid"
                       alt={category.name}
+                      style={{ width: "30px" }}
                     />
                   </div>
                 </div>

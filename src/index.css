@@ -159,5 +159,24 @@ footer{
 
 /* category  start */
 
+.category-row{
+  background-color:   var(--pink-color);
+  padding: 10px;
+ row-gap: 20px !important;
+ flex-wrap: wrap;
+  display: flex  !important;
+  justify-content: space-between !important;
+
+}
+
+.category-col{
+  background-color: #d8ddd0;
+  padding: 10px;
+  margin-left: 20px;
+  border:   1px  solid  #333;
+}
+.category-col  img  {
+  object-fit: cover;
+}
 
 /* category  end  */

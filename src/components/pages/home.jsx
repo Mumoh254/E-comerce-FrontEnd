@@ -101,17 +101,17 @@ export default function Home() {
 
         {/* Categories Section */}
         <div className="home-wrapper py-5">
-          <div className="container-xxl">
-            <div className="row">
+          <div className="container-xxl  category-xxl "  >
+            <div className="row category-row">
               {categoriesData.map((category, index) => (
-                <div key={index} className="col-md-6 mb-3">
-                  <div className="row align-items-center categories p-3 border rounded">
-                    <div className="col-6">
+                <div key={index} className="col category-col">
+                  <div className="row">
+                    <div className="col cat">
                       <h6>{category.name}</h6>
                       <p>{category.items} items</p>
                     </div>
                     <div className="col-6 text-end">
-                      <img src="/images/gal.png" className="img-fluid" alt={category.name} />
+                      <img src="public/images/gal.png" className="img-fluid" alt={category.name} style={{ width: '30px' }} />
                     </div>
                   </div>
                 </div>
