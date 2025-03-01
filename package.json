@@ -10,8 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.5",
     "@reduxjs/toolkit": "^2.5.1",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^3.1.2",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
@@ -24,7 +31,11 @@
     "react-router-dom": "^7.2.0",
     "react-slick": "^0.30.3",
     "react-star-ratings": "^2.3.0",
+    "react-toastify": "^11.0.3",
+    "recharts": "^2.15.1",
+    "reset": "^0.1.0",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.6.13",
     "swiper": "^11.2.4"
   },
   "devDependencies": {

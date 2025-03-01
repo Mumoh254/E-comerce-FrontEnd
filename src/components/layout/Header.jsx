@@ -33,11 +33,11 @@ const Header = () => {
         </div>
       </header>
 
-      {/* 🔹 Main Header (Logo, Search, Cart, Login) */}
+      {/*  Main Header (Logo, Search, Cart, Login) */}
       <header className="header-upper py-3" style={{ backgroundColor: "#F8F9FA", color: "#333" }}>
         <div className="container-xxl">
           <div className="row align-items-center g-3">
-            {/* 🔹 Logo */}
+            {/* Logo */}
             <div className="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
               <h1 className="mb-0">
                 <Link
@@ -61,7 +61,7 @@ const Header = () => {
                   type="text"
                   className="form-control"
                   placeholder="Search for products..."
-                  style={{ outline: "none", border: "1px solid var(--color-sample-3)" }}
+                  style={{ outline: "none", border: "0.5px solidrgb(193, 88, 241)" }}
                 />
                 <span
                   className="input-group-text fs-4"
@@ -76,8 +76,8 @@ const Header = () => {
               </div>
             </div>
 
-            {/* 🔹 Cart, Login, Sign Up */}
-            <div className="col-12 col-md-4 d-flex justify-content-end align-items-center gap-4">
+            {/*  Cart, Login, Sign Up */}
+            <div className=" col-12 col-md-4 d-flex justify-content-end align-items-center gap-4">
               {/*  Cart */}
               <Link to="/cart" className="text-dark d-flex align-items-center position-relative">
                 <FaShoppingCart size={22} style={{ color: "var(--color-sample-3)" }} />
@@ -97,11 +97,12 @@ const Header = () => {
                     justifyContent: "center",
                     fontSize: "12px",
                     fontWeight: "bold",
+                    textDecoration: "none"
                   }}
                 >
                   {cartCount}
                 </span>
-                <span className="ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)" }}>
+                <span className="hd ms-1 fw-bold d-none d-md-inline" style={{ color: "var(--color-sample-3)"   }}>
                   Cart
                 </span>
               </Link>
@@ -126,12 +127,15 @@ const Header = () => {
         </div>
       </header>
 
-      {/* 🔹 Navigation Bar */}
+      {/*Nav  Bar */}
+
       <header className="bg-white py-2 shadow-sm">
         <div className="container-xxl">
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
-              {/* 🔹 Mobile Menu Button */}
+
+              {/* Mobile Menu Button */}
+
               <button
                 className="navbar-toggler border-0"
                 type="button"
@@ -145,14 +149,16 @@ const Header = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
 
-              {/* 🔹 Navbar Items */}
-              <div className="collapse navbar-collapse" id="navbarNav">
+              {/*  Navbar Items */}
+
+              <div className="collapse navbar-collapse  " id="navbarNav ">
                 <ul className="navbar-nav mx-auto gap-3">
-                  {/* 🔹 Categories */}
+                  {/*  Categories */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold d-flex align-items-center"
-                      to="/categories"
+                      to="/store"
                       style={({ isActive }) => ({
                         color: isActive ? "var(--color-sample-2)" : "#333",
                         borderBottom: isActive ? "2px solid var(--color-sample-2)" : "none",
@@ -162,7 +168,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Home */}
+                  {/*  Home */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -176,7 +183,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Shop */}
+                  {/*  Shop */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -190,7 +198,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Hot Deals */}
+                  {/*  Hot Deals */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -208,7 +217,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Sneakers */}
+                  {/*  Sneakers */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -222,7 +232,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Women's Collection */}
+                  {/*  Women's Collection */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -236,7 +247,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Kids */}
+                  {/*  Kids */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -250,7 +262,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Household */}
+                  {/*  Household */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"
@@ -264,7 +277,8 @@ const Header = () => {
                     </NavLink>
                   </li>
 
-                  {/* 🔹 Clothes */}
+                  {/* Clothes */}
+
                   <li className="nav-item">
                     <NavLink
                       className="nav-link fw-bold"

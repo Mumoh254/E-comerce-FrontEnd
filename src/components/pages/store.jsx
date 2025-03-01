@@ -1,164 +1,160 @@
-import React, { useState } from 'react';
-import { Breadcrumb, Card, ListGroup, Form, Button, Modal } from 'react-bootstrap';
-
-// Mock data
-const mockProducts = [
-  {
-    id: 1,
-    name: "Product 1",
-    price: 2500,
-    description: "High-quality product description",
-    image: "https://via.placeholder.com/300",
-    sizes: ["S", "M", "L"],
-    colors: ["#FF0000", "#00FF00", "#0000FF"],
-    category: "Clothing",
-    inStock: true
-  },
-  // Add more products as needed
-];
+import React, { useState, useEffect } from 'react';
+import { Breadcrumb, Card, ListGroup, Form, Button, Modal, Spinner, Alert, Row, Col } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export default function Store() {
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showDetails, setShowDetails] = useState(false);
-  const [priceRange, setPriceRange] = useState('');
-  const [inStockOnly, setInStockOnly] = useState(false);
+  const [filters, setFilters] = useState({
+    category: '',
+    color: '',
+    minPrice: '',
+    maxPrice: '',
+    brand: ''
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [categories] = useState(['women sneakers', 'household', 'kids', 'clothes', 'electronics', 'bata']);
+  const [brands] = useState(['nike', 'adidas', 'puma', 'gucci', 'h&m', 'zara']);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        
+        const queryParams = new URLSearchParams();
+        Object.entries(filters).forEach(([key, value]) => {
+          if (value) queryParams.append(key, value);
+        });
+
+        const url = `http://localhost:3000/apiV1/products/fetch${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) throw new Error('Failed to fetch products');
+        
+        const data = await response.json();
+        setProducts(Array.isArray(data.products) ? data.products : []);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [filters]);
+
+  const handlePriceChange = (range) => {
+    const [min, max] = range.split('-');
+    setFilters(prev => ({ ...prev, minPrice: min || '', maxPrice: max || '' }));
+  };
+  const addToCart = async (productId, color = "Red", count = 1) => {
+    try {
+      const cartData = {
+        cart: [{ _id: productId, count, color }]
+      };
+  
+      const response = await axios.post(
+        "http://localhost:8000/apiV1/majestycollections/user/cart",
+        cartData
+      );
+  
+      if (response.data.success) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Added to cart!",
+          showConfirmButton: false,
+          timer: 2000, // 2 seconds
+        });
+      }
+    } catch (error) {
+      Swal.fire("Error", error.response?.data?.message || "Failed to add to cart", "error");
+    }
+  };
+  
+  
 
   const ColorCircle = ({ color }) => (
     <div 
       className="color-circle me-2"
-      style={{
-        backgroundColor: color,
-        width: '24px',
-        height: '24px',
-        borderRadius: '50%',
-        border: '2px solid #dee2e6',
-        cursor: 'pointer'
+      style={{ 
+        backgroundColor: color, 
+        width: '24px', 
+        height: '24px', 
+        borderRadius: '50%', 
+        border: '2px solid #dee2e6', 
+        cursor: 'pointer' 
       }}
       title={color}
+      onClick={() => setFilters(prev => ({ ...prev, color: prev.color === color ? '' : color }))}
     />
   );
-
-  const handleShowDetails = (product) => {
-    setSelectedProduct(product);
-    setShowDetails(true);
-  };
-
-  const handleCloseDetails = () => {
-    setShowDetails(false);
-    setSelectedProduct(null);
-  };
-
-  const filteredProducts = mockProducts.filter(product => {
-    return (
-      (!inStockOnly || product.inStock) &&
-      (!priceRange || (
-        product.price >= parseInt(priceRange.split('-')[0]) && 
-        product.price <= parseInt(priceRange.split('-')[1])
-      ))
-    );
-  });
 
   return (
     <div className="store-wrapper container-xxl py-4">
       <Breadcrumb className="mb-4">
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Majest Collections Store</Breadcrumb.Item>
+        <Breadcrumb.Item active>Majesty Collections Store</Breadcrumb.Item>
       </Breadcrumb>
 
-      {/* Product Details Modal */}
-      <Modal show={showDetails} onHide={handleCloseDetails} centered size="lg">
-        {selectedProduct && (
-          <>
-            <Modal.Header closeButton>
-              <Modal.Title>{selectedProduct.name}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="row g-4">
-                <div className="col-md-6">
-                  <img
-                    src={selectedProduct.image}
-                    alt={selectedProduct.name}
-                    className="img-fluid rounded"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <h4 className="mb-3">{selectedProduct.name}</h4>
-                  <h5 className="text-primary mb-4">Ksh {selectedProduct.price}</h5>
-                  <p className="text-muted">{selectedProduct.description}</p>
+      {loading && <div className="text-center"><Spinner animation="border" /></div>}
+      {error && <Alert variant="danger">{error}</Alert>}
 
-                  <div className="my-4">
-                    <h6>Available Sizes:</h6>
-                    <div className="d-flex gap-2">
-                      {selectedProduct.sizes.map(size => (
-                        <Button variant="outline-secondary" key={size}>
-                          {size}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="my-4">
-                    <h6>Available Colors:</h6>
-                    <div className="d-flex gap-2">
-                      {selectedProduct.colors.map(color => (
-                        <ColorCircle key={color} color={color} />
-                      ))}
-                    </div>
-                  </div>
-
-                  <Button variant="primary" className="w-100">
-                    Add to Cart
-                  </Button>
-                </div>
-              </div>
-            </Modal.Body>
-          </>
-        )}
-      </Modal>
-
-      <div className="row g-4">
-        {/* Filters Column */}
-        <div className="col-md-3">
+      <Row className="g-4">
+        <Col md={3}>
           <Card className="filter-card mb-4 shadow-sm">
             <Card.Body>
-              <h5 className="mb-3">Shop by Categories</h5>
+              <h5 className="mb-3">Categories</h5>
               <ListGroup variant="flush">
-                <ListGroup.Item action>Clothing</ListGroup.Item>
-                <ListGroup.Item action>Women's Fashion</ListGroup.Item>
-                <ListGroup.Item action>Household Items</ListGroup.Item>
+                {categories.map(category => (
+                  <ListGroup.Item 
+                    key={category} 
+                    action 
+                    active={filters.category === category} 
+                    onClick={() => setFilters(prev => ({ ...prev, category: prev.category === category ? '' : category }))}
+                  >
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </Card.Body>
           </Card>
 
           <Card className="filter-card mb-4 shadow-sm">
             <Card.Body>
-              <h5 className="mb-3">Product Filters</h5>
-              
-              <div className="mb-4">
-                <Form.Check 
-                  type="checkbox"
-                  label="In Stock Only"
-                  id="stock-check"
-                  checked={inStockOnly}
-                  onChange={(e) => setInStockOnly(e.target.checked)}
-                />
-              </div>
-
-              <div className="mb-4">
-                <h6 className="text-muted">Price Range</h6>
-                <Form.Select 
-                  value={priceRange}
-                  onChange={(e) => setPriceRange(e.target.value)}
-                >
-                  <option value="">All Prices</option>
-                  <option value="200-300">Ksh 200 - 300</option>
-                  <option value="1000-4000">Ksh 1,000 - 4,000</option>
-                  <option value="5000-6000">Ksh 5,000 - 6,000</option>
+              <h5 className="mb-3">Filters</h5>
+              <Form.Group className="mb-4">
+                <Form.Label>Brand</Form.Label>
+                <Form.Select value={filters.brand} onChange={(e) => setFilters(prev => ({ ...prev, brand: e.target.value }))}>
+                  <option value="">All Brands</option>
+                  {brands.map(brand => 
+                    <option key={brand} value={brand}>
+                      {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                    </option>
+                  )}
                 </Form.Select>
-              </div>
+              </Form.Group>
+
+              <Form.Group className="mb-4">
+                <Form.Label>Price Range (Ksh)</Form.Label>
+                <Form.Select 
+                  value={`${filters.minPrice}-${filters.maxPrice}`} 
+                  onChange={(e) => handlePriceChange(e.target.value)}
+                >
+                  <option value="-">All Prices</option>
+                  <option value="1-2000">1 - 2,000</option>
+                  <option value="2000-3000">2,000 - 3,000</option>
+                  <option value="3000-7000">3,000 - 7,000</option>
+                  <option value="7000-10000">7,000 - 10,000</option>
+                  <option value="10000-">10,000+</option>
+                </Form.Select>
+              </Form.Group>
 
               <div className="mb-4">
-                <h6 className="text-muted">Colors</h6>
+                <Form.Label>Colors</Form.Label>
                 <div className="d-flex flex-wrap">
                   <ColorCircle color="#FF0000" />
                   <ColorCircle color="#FFFFFF" />
@@ -169,55 +165,74 @@ export default function Store() {
               </div>
             </Card.Body>
           </Card>
+        </Col>
 
-          <Card className="filter-card shadow-sm">
-            <Card.Body>
-              <h5 className="mb-3">Featured Products</h5>
-              <div className="row g-2">
-                {mockProducts.slice(0, 3).map((product) => (
-                  <div className="col-4" key={product.id}>
-                    <img 
-                      src={product.image}
-                      alt="Featured product"
-                      className="img-fluid rounded"
-                    />
-                  </div>
-                ))}
-              </div>
-            </Card.Body>
-          </Card>
-        </div>
-
-        {/* Products Column */}
-        <div className="col-md-9">
-          <div className="row g-4">
-            {filteredProducts.map((product) => (
-              <div className="col-md-4" key={product.id}>
+        <Col md={9}>
+          <Row className="g-4">
+            {products.map(product => (
+              <Col key={product._id} xs={12} sm={6} lg={4}>
                 <Card className="h-100 shadow-sm">
                   <Card.Img 
                     variant="top" 
                     src={product.image} 
-                    className="p-3"
+                    style={{ height: '200px', objectFit: 'contain', padding: '1rem' }} 
                   />
-                  <Card.Body>
-                    <Card.Title className="h6">{product.name}</Card.Title>
-                    <Card.Text className="text-muted small">
-                      Ksh {product.price}
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title>{product.name}</Card.Title>
+                    <Card.Text className="mt-auto">
+                      <span className="text-primary fw-bold">Ksh {product.price}</span>
+                      <br/>
+                      <small className="text-muted">{product.brand}</small>
                     </Card.Text>
                     <Button 
                       variant="outline-primary" 
-                      size="sm"
-                      onClick={() => handleShowDetails(product)}
+                      onClick={() => setSelectedProduct(product)}
                     >
                       View Details
                     </Button>
                   </Card.Body>
                 </Card>
-              </div>
+              </Col>
             ))}
-          </div>
-        </div>
-      </div>
+          </Row>
+        </Col>
+      </Row>
+
+      <Modal show={!!selectedProduct} onHide={() => setSelectedProduct(null)} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedProduct?.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedProduct && (
+            <Row>
+              <Col md={6}>
+                <img 
+                  src={selectedProduct.image} 
+                  alt={selectedProduct.name} 
+                  className="img-fluid rounded"
+                />
+              </Col>
+              <Col md={6}>
+                <p>{selectedProduct.description}</p>
+                <p><strong>Brand:</strong> {selectedProduct.brand}</p>
+                <p><strong>Category:</strong> {selectedProduct.category}</p>
+                <p><strong>Color:</strong> {selectedProduct.color}</p>
+                <p><strong>Price:</strong> Ksh {selectedProduct.price}</p>
+                <Button 
+                  variant="primary" 
+                  className="mt-3"
+                  onClick={() => {
+                    addToCart(selectedProduct._id);
+                    setSelectedProduct(null);
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              </Col>
+            </Row>
+          )}
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

@@ -37,9 +37,9 @@ export default function Blog() {
   ];
 
   return (
-    <div className="blog-wrapper py-2" style={{ minHeight: '400px' }}>
-      <div className="container-xxl">
-        <h2 className="text-start mb-4 fs-3">Latest Blog Posts ...</h2>
+    <div className="blog-wrapper py-4" >
+      <div className="container-xxl h-auto ">
+        <h2 className="text-start ">Latest Blog Posts ...</h2>
 
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -57,15 +57,15 @@ export default function Blog() {
         >
           {blogPosts.map((post) => (
             <SwiperSlide key={post.id} style={{ height: 'auto' }}>
-              <div className="blog-card h-100 p-2 border rounded shadow-sm d-flex flex-column">
+              <div className="blog-card h-auto p-2 border rounded shadow-sm d-flex flex-column">
                 <img
                   src={post.image}
                   alt={post.title}
                   className="w-100 rounded"
-                  style={{ height: "150px", objectFit: "cover" }}
+                  style={{ height: "220px", objectFit: "cover" }}
                 />
 
-                <div className="card-content pt-2 flex-grow-1">
+                <div className="card-content px-4 flex-grow-1 h-auto" >
                   <h6 className="mb-2 fs-6 fw-semibold">{post.title}</h6>
                   <p className="small text-muted mb-2">{post.description}</p>
                 </div>

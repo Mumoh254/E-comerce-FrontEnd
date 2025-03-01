@@ -4,12 +4,12 @@ import { Modal, Button, Badge } from "react-bootstrap";
 const productsData = [
   {
     id: 1,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbearQ-RH3Ulk5t6FDYL5Nk8BJMyv5WbEiKw&s",
-    brand: "Nike",
-    title: "Air Max Sneakers",
-    price: 8500,
-    description: "Comfortable Air Max sneakers with premium cushioning.",
-    sizes: [40, 41, 42, 43, 44],
+    image: "/images/shoes/woman.png",
+    brand: "Exellent  Heels ",
+    title: "Excellent Heels",
+    description: "Comfortable Hells sneakers ",
+    price: 1800,
+    sizes: [  36  -  42 ],
     colors: ["#FF0000", "#000000", "#FFFFFF"],
   },
   {
@@ -69,7 +69,7 @@ const Products = () => {
             alt={`${product.brand} ${product.title}`}
             className="img-fluid rounded hover-zoom"
             style={{ 
-              height: "100px",
+              height: "250px",
               width: "100%", 
               objectFit: "cover",
               transition: "transform 0.3s ease"
@@ -78,8 +78,8 @@ const Products = () => {
         </div>
         <div className="product-details text-start px-1">
           <p className="text-muted mb-0 small text-truncate">{product.brand}</p>
-          <h6 className="mb-1 small text-truncate">{product.title}</h6>
-          <p className="text-primary mb-0 small">{formatPrice(product.price)}</p>
+          <h4 className="mb-1 small text-p">{product.title}</h4>
+          <p className="color-text mb-0 small">{formatPrice(product.price)}</p>
         </div>
       </div>
     </div>
