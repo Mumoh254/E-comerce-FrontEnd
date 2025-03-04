@@ -6,7 +6,7 @@ import Store from './components/pages/store';
 import Register from './components/pages/register';
 import Login from './components/pages/login';
 import Cart from './components/pages/cart';
-import Checkout from './components/pages/checkout';
+
 import ResetPassword from './components/pages/resetpassword';
 import AdminLayout from './components/layout/adminLayout';
 import Dashboard from './components/pages/admin/dashboard';
@@ -16,7 +16,10 @@ import CreateProduct from './components/pages/admin/createproduct';
 import AdminLogin from './components/pages/admin/adminLogin';
 import AdminRoute from './components/pages/admin/adminrouteprotect';
 import LogoutButton from './components/pages/admin/logoutadmin';
+import OrderConfirmation from './components/pages/confirmOrder';
 import   AdminProductsTable from './components/pages/admin/adminProdTable'
+
+import   Checkout from './components/pages/checkout'
 
 import NotFound from './components/404';
 
@@ -55,8 +58,10 @@ function App() {
               <Route path="orders" element={<Orders />} />
               
               <Route path="products" element={<AdminProductsTable />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="confirmed" element={<OrderConfirmation />} />
               
-
+              
 
               <Route path="orders" element={<Orders />} />
               <Route path="products/createproduct" element={<CreateProduct />} />

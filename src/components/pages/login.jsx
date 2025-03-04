@@ -12,105 +12,63 @@ export default function Login() {
   const [message, setMessage] = useState({ text: "", type: "" });
   const navigate = useNavigate();
 
-  // Add state initialization for better stability
-  const [formValid, setFormValid] = useState(true);
-
   const validateForm = () => {
-    const isValid = email.length > 0 && password.length > 0;
-    setFormValid(isValid);
-    return isValid;
+    return email.trim() !== "" && password.trim() !== "";
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
-    
+    if (!validateForm()) {
+      setMessage({ text: "Email and password are required!", type: "error" });
+      return;
+    }
+  
     setLoading(true);
     setMessage({ text: "", type: "" });
-
+  
     try {
       const response = await axios.post(
         "http://localhost:3000/apiV1/majestycollections/login",
         { email, password },
-        { 
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+        { withCredentials: true, headers: { "Content-Type": "application/json" } }
       );
-      console.log(response.data.accessToken)
+  
+      console.log("API Response:", response.data);
+  
+      const token = response.data.token;
 
-      const token = response.data.accessToken
-      const userData = response?.data
-
-      if (!token) throw new Error("Authentication failed: No token received");
-
-      // Enhanced token validation
-      
-      try {
-        const decodedToken = jwt_decode(token);
-        const expirationTime = decodedToken.exp * 1000;
-
-        console.log(decodedToken)
-
-        // Secure cookie settings
-        const cookieOptions = {
-          expires: new Date(expirationTime),
-          path: '/',
-          sameSite: 'Strict',
-          secure: process.env.NODE_ENV === 'production'
-        };
-
-        Cookies.set("authToken", token, cookieOptions);
-        
-        if (userData?.role) {
-          Cookies.set("userRole", userData.role, cookieOptions);
-        }
-
-        // Set axios default headers
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-        // Immediate feedback before redirect
-        if(userData.role == "admin"){
-          navigate( "/admin"  , redirectUrl )
-        }
-        setMessage({
-          text: "Login successful! Redirecting...",
-          type: "success"
-        });
-
-        // Slight delay for user feedback
-        setTimeout(() => {
-          navigate(userData?.role === "admin" ? "/admin" : "/store", { 
-            replace: true,
-            state: { freshLogin: true }  // Add navigation state
-          });
-        }, 1500);
-
-      } catch (decodeError) {
-        console.error("JWT Decode Error:", decodeError);
-        throw new Error("Invalid authentication token");
+      if (!token || token.split(".").length !== 3) {
+        throw new Error("Invalid token format received");
       }
+  
+      const decoded = jwt_decode(token);
+      if (decoded.exp * 1000 < Date.now()) {
+        throw new Error("Token has expired. Please log in again.");
+      }
+  
+      // Store token securely
+    Cookies.set("userToken", token, { expires: 7, sameSite: "Lax" });
 
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  
+      // Redirect based on user role
+      if (decoded.role === "admin") {
+        window.location.replace("/admin");
+      } else if (decoded.role === "user") {
+        navigate("/store");
+      } else {
+        throw new Error("Unauthorized role access");
+      }
+  
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                          err.message || 
-                          "Login failed. Please try again.";
-      
-      setMessage({
-        text: errorMessage,
-        type: "error"
-      });
-
-      // Clear credentials on error
-      Cookies.remove("authToken");
-      Cookies.remove("userRole");
-      
+      console.error("Authentication error:", err);
+      setMessage({ text: err.response?.data?.message || "Authentication failed. Please try again.", type: "error" });
     } finally {
       setLoading(false);
     }
   };
+  
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 relative">
       {/* Enhanced Message Display */}

@@ -1,26 +1,35 @@
 import { Navigate, Outlet } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const AdminRoute = () => {
-  const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("adminToken"); // Corrected local storage key
 
   if (!token) {
-    console.log("No token found! Redirecting to login...");
+    console.warn("No token found! Redirecting to login...");
     return <Navigate to="/admin/login" replace />;
   }
 
   try {
-    const user = JSON.parse(atob(token.split(".")[1])); // Decode JWT
+    const user = jwtDecode(token);
     console.log("Decoded User:", user);
 
-    if (user?.role !== "admin") {
-      console.log("User is not admin! Redirecting...");
+    // Check if the token is expired
+    if (user.exp * 1000 < Date.now()) {
+      console.warn("Token has expired! Redirecting to login...");
+      localStorage.removeItem("adminToken"); // Clear expired token
+      return <Navigate to="/admin/login" replace />;
+    }
+
+    if (user.role !== "admin") {
+      console.warn("User is not an admin! Redirecting...");
       return <Navigate to="/admin/login" replace />;
     }
 
     console.log("Access granted!");
     return <Outlet />;
   } catch (error) {
-    console.log("Token invalid or malformed! Redirecting...");
+    console.error("Token invalid or malformed! Redirecting...");
+    localStorage.removeItem("adminToken"); // Clear invalid token
     return <Navigate to="/admin/login" replace />;
   }
 };

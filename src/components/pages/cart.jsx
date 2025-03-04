@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Spinner, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Swal from 'sweetalert2';
+
+const API_BASE = 'https://majestycollections.onrender.com/majestycollections';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -10,34 +11,94 @@ const Cart = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   const fetchCart = async () => {
     try {
-      const token = Cookies.get('authToken');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
+      const token = Cookies.get('userToken');
+      if (!token) return navigate('/login');
 
-      const response = await fetch('http://localhost:8000/apiV1/majestycollections/cart', {
-        method: "GET",
+      const response = await fetch(`${API_BASE}/cart`, {
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-        credentials: "include",
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          Cookies.remove('authToken');
-          navigate('/login');
-          return;
+          Cookies.remove('userToken');
+          return navigate('/login');
         }
         throw new Error('Failed to fetch cart');
       }
 
       const data = await response.json();
-      setCartItems(data.cartItems || []);
+      setCartItems(data.cart?.products || []);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const updateCart = async (cartItems) => {
+    try {
+      const token = Cookies.get('userToken');
+      if (!token) return navigate('/login');
+  
+      const response = await fetch(`${API_BASE}/user/cart`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cart: cartItems.map((item) => ({
+            _id: item.product._id,
+            count: item.count,
+          })),
+        }),
+      });
+  
+      if (!response.ok) throw new Error('Cart update failed');
+  
+      const data = await response.json();
+      setCartItems(data.cart.products);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+  
+const handleQuantityChange = (productId, newCount) => {
+  if (newCount < 1) return;
+
+  setCartItems((prevCart) =>
+    prevCart.map((item) =>
+      item.product._id === productId ? { ...item, count: newCount } : item
+    )
+  );
+
+  updateCart(cartItems);
+};
+
+
+  const handleRemoveItem = async (productId) => {
+    setLoading(true);
+    try {
+      const token = Cookies.get('userToken');
+      const response = await fetch(`${API_BASE}/cart/${productId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove item');
+      }
+
+      fetchCart();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -45,67 +106,8 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = async (productId) => {
-    try {
-      const token = Cookies.get('authToken');
-      const response = await fetch(`http://localhost:8000/apiV1/majestycollections/user/cart/${productId}`, {
-        method: 'DELETE',
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-      });
-      
-      if (!response.ok) throw new Error('Failed to remove item');
-      await fetchCart();
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleCheckout = async () => {
-    try {
-      const token = Cookies.get('authToken');
-      const response = await fetch('http://localhost:8000/apiV1/majestycollections/cart/order', {
-        method: 'POST',
-        headers: { 
-          'Authorization': `Bearer ${token}`, 
-          'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({ COD: true }),
-        credentials: 'include',
-      });
-      
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || 'Failed to place order');
-
-      Swal.fire({
-        title: 'Success!',
-        text: 'Order placed successfully!',
-        icon: 'success',
-        timer: 2000,
-        showConfirmButton: false
-      });
-      setCartItems([]);
-      navigate('/orders');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const token = Cookies.get('authToken');
-      if (!token) {
-        navigate('/login');
-        return;
-      }
-      fetchCart();
-    };
-
-    checkAuth();
-  }, [navigate]);
+  const calculateTotal = () =>
+    cartItems.reduce((total, item) => total + item.price * item.count, 0).toFixed(2);
 
   if (loading) return <Spinner animation="border" className="d-block mx-auto my-5" />;
 
@@ -134,21 +136,48 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(item => (
-                <tr key={item._id}>
-                  <td>{item.name}</td>
-                  <td>Ksh {item.price}</td>
-                  <td>{item.quantity}</td>
-                  <td>Ksh {(item.price * item.quantity).toFixed(2)}</td>
+              {cartItems.map((item) => (
+                <tr key={item.product._id}>
+                  <td>{item.product.title}</td>
                   <td>
-                    <Button 
-                      variant="outline-danger" 
+  <img src={item?.product?.image || "/placeholder.jpg"} alt={item?.product?.name || "Product"} width="50" />
+</td>
+
+
+                  <td>Ksh {item.price.toFixed(2)}</td>
+                  <td>
+                    <Button
                       size="sm"
-                      onClick={() => handleRemoveItem(item._id)}
+                      onClick={() => handleQuantityChange(item.product._id, item.count - 1)}
+                      disabled={loading || item.count <= 1}
                     >
-                      Remove
+                      -
+                    </Button>
+                    <span className="mx-2">{item.count}</span>
+                    <Button
+                      size="sm"
+                      onClick={() => handleQuantityChange(item.product._id, item.count + 1)}
+                      disabled={loading}
+                    >
+                      +
                     </Button>
                   </td>
+                  <td>Ksh {(item.price * item.count).toFixed(2)}</td>
+                  <td>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={() => handleRemoveItem(item.product._id)}
+                      disabled={loading}
+                    >
+                      {loading ? <Spinner size="sm" /> : 'Remove'}
+                    </Button>
+                  </td>
+                  <td>
+  <img src={item.product.image} alt={item.product.name} width="50" height="50" />
+  {item.product.name}
+</td>
+
                 </tr>
               ))}
             </tbody>
@@ -156,15 +185,14 @@ const Cart = () => {
 
           <div className="d-flex justify-content-between align-items-center mt-4">
             <div className="text-end w-100">
-              <h4 className="mb-3">
-                Total: Ksh {cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}
-              </h4>
-              <Button 
-                variant="success" 
-                onClick={handleCheckout}
+              <h4 className="mb-3">Total: Ksh {calculateTotal()}</h4>
+              <Button
+                variant="success"
+                onClick={() => navigate('/checkout')}
                 className="px-5 float-end"
+                disabled={cartItems.length === 0}
               >
-                Place Order (COD)
+                Proceed to Checkout
               </Button>
             </div>
           </div>

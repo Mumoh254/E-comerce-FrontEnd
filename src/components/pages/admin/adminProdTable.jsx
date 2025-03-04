@@ -1,54 +1,180 @@
 import React from "react";
 import UseProducts from "../useproduct";
+import Swal from "sweetalert2";
+import { FaEye, FaEdit, FaTrash, FaSync } from "react-icons/fa";
+import { Table, Container, Button, Spinner, Alert, Form } from "react-bootstrap";
+import slugify from "slugify";
 
 const AdminProductsTable = () => {
   const { products, loading, error, fetchProducts } = UseProducts();
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
+  const handleView = (product) => {
+    Swal.fire({
+      title: `<strong>${product.name}</strong>`,
+      html: `
+        <div class="text-left">
+          <p><b>Slug:</b> ${product.slug}</p>
+          <p><b>Category:</b> ${product.category}</p>
+          <p><b>Price:</b> $${product.price}</p>
+          <p><b>Stock:</b> ${product.quantity}</p>
+        <p><b>Sizes:</b> ${Array.isArray(product.sizes) ? product.sizes.join(", ") : "N/A"}</p>
+
+          <p><b>Description:</b> ${product.description}</p>
+        </div>
+      `,
+      showCloseButton: true,
+      showConfirmButton: false,
+      background: "#f8f9fa",
+      width: "600px"
+    });
+  };
+
+  const handleDelete = async (productId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`http://localhost:3000/apiV1/products/delete/${productId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem("adminToken")}`
+            }
+          });
+
+          if (!response.ok) throw new Error('Failed to delete product');
+          
+          Swal.fire('Deleted!', 'Product has been deleted.', 'success');
+          fetchProducts();
+        } catch (error) {
+          Swal.fire('Error!', error.message, 'error');
+        }
+      }
+    });
+  };
+
+  const handleUpdate = (product) => {
+    Swal.fire({
+      title: `Edit ${product.name}`,
+      html: `
+        <input id="name" class="swal2-input" placeholder="Product Name" value="${product.name}">
+        <input id="price" type="number" class="swal2-input" placeholder="Price" value="${product.price}">
+        <input id="quantity" type="number" class="swal2-input" placeholder="Stock Quantity" value="${product.quantity}">
+      <input id="sizes" class="swal2-input" placeholder="Sizes (comma separated)" value="${Array.isArray(product.sizes) ? product.sizes.join(", ") : ""}">
+
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Update',
+      cancelButtonText: 'Cancel',
+      preConfirm: async () => {
+        try {
+          const updateData = {
+            name: Swal.getPopup().querySelector('#name').value,
+            price: parseFloat(Swal.getPopup().querySelector('#price').value),
+            quantity: parseInt(Swal.getPopup().querySelector('#quantity').value),
+            sizes: Swal.getPopup().querySelector('#sizes').value
+              .split(',')
+              .map(size => parseInt(size.trim())),
+            slug: slugify(Swal.getPopup().querySelector('#name').value, { lower: true })
+          };
+
+          const response = await fetch(`https://majestycollections.onrender.com/products/update/${product._id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("adminToken")}`
+            },
+            body: JSON.stringify(updateData)
+          });
+
+          if (!response.ok) throw new Error('Failed to update product');
+          
+          Swal.fire('Updated!', 'Product has been updated.', 'success');
+          fetchProducts();
+        } catch (error) {
+          Swal.fire('Error!', error.message, 'error');
+        }
+      }
+    });
+  };
+
+  if (loading) return (
+    <div className="d-flex justify-content-center mt-5">
+      <Spinner animation="border" variant="primary" />
+    </div>
+  );
+
+  if (error) return (
+    <Container className="mt-4">
+      <Alert variant="danger">Error: {error}</Alert>
+    </Container>
+  );
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-md">
-      <h2 className="text-xl font-semibold mb-4">Product List</h2>
-      <button
-        onClick={fetchProducts}
-        className="mb-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-      >
-        Refresh Products
-      </button>
-      <table className="w-full border-collapse border border-gray-200">
-        <thead>
-          <tr className="bg-gray-100 text-left">
-            <th className="p-2 border">#</th>
-            <th className="p-2 border">Product Name</th>
-            <th className="p-2 border">Category</th>
-            <th className="p-2 border">Price</th>
-            <th className="p-2 border">Actions</th>
+    <Container className="py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="h3 mb-0">Product Management</h2>
+        <Button variant="primary" onClick={fetchProducts}>
+          <FaSync className="me-2" /> Refresh Products
+        </Button>
+      </div>
+
+      <Table striped bordered hover responsive>
+        <thead className="bg-light">
+          <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Slug</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Brand</th>
+            <th>Sizes</th>
+           
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {products.length === 0 ? (
             <tr>
-              <td colSpan="5" className="p-4 text-center">No products found</td>
+              <td colSpan="7" className="text-center py-4">No products found</td>
             </tr>
           ) : (
             products.map((product, index) => (
-              <tr key={product.id} className="hover:bg-gray-50">
-                <td className="p-2 border">{index + 1}</td>
-                <td className="p-2 border">{product.name}</td>
-                <td className="p-2 border">{product.category}</td>
-                <td className="p-2 border">${product.price}</td>
-                <td className="p-2 border">
-                  <button className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700">
-                    View
-                  </button>
+              <tr key={product._id}>
+                <td>{index + 1}</td>
+                <td>{product.title}</td>
+                <td>{product.slug}</td>
+                <td> KSH: {product.price}</td>
+                <td>{product.quantity}</td>
+                <td>{product.brand}</td>
+                <td>{Array.isArray(product.sizes) ? product.sizes.join(", ") : "N/A"}</td>
+
+                <td>
+                  <div className="d-flex gap-2">
+                    <Button variant="outline-primary" size="sm" onClick={() => handleView(product)}>
+                      <FaEye />
+                    </Button>
+                    <Button variant="outline-success" size="sm" onClick={() => handleUpdate(product)}>
+                      <FaEdit />
+                    </Button>
+                    <Button variant="outline-danger" size="sm" onClick={() => handleDelete(product._id)}>
+                      <FaTrash />
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))
           )}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Container>
   );
 };
 

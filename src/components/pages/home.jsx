@@ -126,6 +126,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              
               <div className="col-12 col-md-6">
                 <div className="row">
                   <div className="col-12 col-md-6 mb-4">

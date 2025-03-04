@@ -30,7 +30,7 @@ export default function Register() {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://localhost:3000/apiV1/majestycollections/register",
+        "https://majestycollections.onrender.com/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

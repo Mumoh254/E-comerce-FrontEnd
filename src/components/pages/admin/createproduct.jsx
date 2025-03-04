@@ -1,33 +1,50 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col, Image, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Cookies from 'js-cookie';
+
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
-    name: '',
+    title: '',
     brand: '',
-    model: '',
     price: '',
     color: '',
-    size: '',
     category: '',
-    stock: '',
+    quantity: '',
+    sizes: [],
     slug: '',
     description: '',
   });
-  const [imagePreview, setImagePreview] = useState('');
-  const [imageFile, setImageFile] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     const newErrors = {};
-    if (!product.name) newErrors.name = 'Product name is required';
+    if (!product.title.trim()) newErrors.title = 'Product title is required';
     if (!product.price) newErrors.price = 'Price is required';
-    if (!product.stock) newErrors.stock = 'Stock quantity is required';
-    if (!imageFile) newErrors.image = 'Product image is required';
+    if (!product.quantity) newErrors.quantity = 'Quantity is required';
+    if (imageFiles.length === 0) newErrors.images = 'At least one image is required';
+    
+    // Validate sizes
+    if (product.sizes.length === 0) {
+      newErrors.sizes = 'At least one size is required';
+    } else if (product.sizes.some(size => isNaN(size))) {
+      newErrors.sizes = 'Sizes must be numbers';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -36,16 +53,24 @@ const CreateProduct = () => {
     const { name, value } = e.target;
     setProduct(prev => ({
       ...prev,
-      [name]: name === 'price' || name === 'stock' ? Number(value) : value
+      [name]: name === 'sizes' 
+        ? value.split(',')
+              .map(s => s.trim())
+              .filter(s => s !== '')
+              .map(Number)
+              .filter(n => !isNaN(n))
+        : value,
+      slug: name === 'title' ? slugify(value) : prev.slug,
     }));
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
-      setErrors(prev => ({ ...prev, image: null }));
+    const files = Array.from(e.target.files);
+    if (files.length > 0) {
+      setImageFiles(files);
+      const previews = files.map(file => URL.createObjectURL(file));
+      setImagePreviews(previews);
+      setErrors(prev => ({ ...prev, images: null }));
     }
   };
 
@@ -55,25 +80,29 @@ const CreateProduct = () => {
 
     setLoading(true);
     const token = localStorage.getItem("adminToken");
-    console.log("Auth Token:", token);
-    if (!token) {
-      Swal.fire('Error', 'Authentication token is missing. Please log in again.', 'error');
-      return;
-    }
-  
-    const formData = new FormData();
 
-    // Append product data
-    Object.entries(product).forEach(([key, value]) => {
-      formData.append(key, value);
+    const formData = new FormData();
+    formData.append('title', product.title);
+    formData.append('brand', product.brand);
+    formData.append('price', product.price);
+    formData.append('color', product.color);
+    formData.append('category', product.category);
+    formData.append('quantity', product.quantity);
+    formData.append('description', product.description);
+    formData.append('slug', product.slug);
+    
+    // Add multiple images
+    imageFiles.forEach((file) => {
+      formData.append('images', file);
     });
 
-    // Append image and sizes
-    formData.append('image', imageFile);
-    formData.append('sizes', product.size.split(',').map(num => parseInt(num.trim(), 10)));
+    // Add sizes correctly
+    product.sizes.forEach(size => {
+      formData.append('sizes', size);
+    });
 
     try {
-      const response = await fetch('http://localhost:3000/apiV1/products/create', {
+      const response = await fetch('https://majestycollections.onrender.com/products/create', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -87,20 +116,18 @@ const CreateProduct = () => {
         Swal.fire('Success', 'Product created successfully!', 'success');
         // Reset form
         setProduct({
-          name: '',
           title: '',
           brand: '',
-          model: '',
           price: '',
           color: '',
-          size: '',
           category: '',
-          stock: '',
+          quantity: '',
+          sizes: [],
           slug: '',
           description: '',
         });
-        setImageFile(null);
-        setImagePreview('');
+        setImageFiles([]);
+        setImagePreviews([]);
       } else {
         Swal.fire('Error', data.message || 'Failed to create product', 'error');
       }
@@ -124,16 +151,16 @@ const CreateProduct = () => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Product Name *</Form.Label>
+              <Form.Label>Product Title *</Form.Label>
               <Form.Control
                 type="text"
-                name="name"
-                value={product.name}
+                name="title"
+                value={product.title}
                 onChange={handleChange}
-              
+                isInvalid={!!errors.title}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.name}
+                {errors.title}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -143,16 +170,6 @@ const CreateProduct = () => {
                 type="text"
                 name="brand"
                 value={product.brand}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Model</Form.Label>
-              <Form.Control
-                type="text"
-                name="model"
-                value={product.model}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -184,17 +201,6 @@ const CreateProduct = () => {
 
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Available Sizes (comma separated)</Form.Label>
-              <Form.Control
-                type="text"
-                name="size"
-                value={product.size}
-                onChange={handleChange}
-                placeholder="Example: 38,40,42"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="text"
@@ -208,41 +214,57 @@ const CreateProduct = () => {
               <Form.Label>Stock Quantity *</Form.Label>
               <Form.Control
                 type="number"
-                name="stock"
-                value={product.stock}
+                name="quantity"
+                value={product.quantity}
                 onChange={handleChange}
-             
+                isInvalid={!!errors.quantity}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.stock}
+                {errors.quantity}
               </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Product Slug</Form.Label>
+              <Form.Label>Available Sizes * (comma separated)</Form.Label>
               <Form.Control
                 type="text"
-                name="slug"
-                value={product.slug}
+                name="sizes"
+                value={product.sizes.join(', ')}
                 onChange={handleChange}
-                placeholder="Unique product identifier"
+                placeholder="E.g., 38, 40, 42"
+                isInvalid={!!errors.sizes}
               />
+              <Form.Text className="text-muted">
+                Enter numbers separated by commas (e.g., 38, 40, 42)
+              </Form.Text>
+              <Form.Control.Feedback type="invalid">
+                {errors.sizes}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Product Image *</Form.Label>
+              <Form.Label>Product Images *</Form.Label>
               <Form.Control
                 type="file"
                 accept="image/*"
+                multiple
                 onChange={handleImageUpload}
-                isInvalid={!!errors.image}
+                isInvalid={!!errors.images}
               />
-              {errors.image && (
-                <Form.Text className="text-danger">{errors.image}</Form.Text>
+              {errors.images && (
+                <Form.Text className="text-danger">{errors.images}</Form.Text>
               )}
-              {imagePreview && (
-                <div className="mt-3">
-                  <Image src={imagePreview} alt="Preview" thumbnail style={{ maxHeight: '200px' }} />
+              {imagePreviews.length > 0 && (
+                <div className="mt-3 d-flex flex-wrap gap-2">
+                  {imagePreviews.map((preview, index) => (
+                    <Image 
+                      key={index}
+                      src={preview} 
+                      alt={`Preview ${index + 1}`} 
+                      thumbnail 
+                      style={{ height: '100px', width: '100px', objectFit: 'cover' }} 
+                    />
+                  ))}
                 </div>
               )}
             </Form.Group>
@@ -260,16 +282,9 @@ const CreateProduct = () => {
           />
         </Form.Group>
 
-        <div className="d-grid gap-2">
-          <Button 
-            variant="primary" 
-            type="submit" 
-            size="lg"
-            disabled={loading}
-          >
-            {loading ? 'Uploading...' : 'Create Product'}
-          </Button>
-        </div>
+        <Button variant="primary" type="submit" size="lg" disabled={loading}>
+          {loading ? 'Uploading...' : 'Create Product'}
+        </Button>
       </Form>
     </Container>
   );

@@ -16,48 +16,49 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/apiV1/majestycollections/login/admin",
+        "https://majestycollections.onrender.com/login/admin",
         credentials,
         {
-          withCredentials: true, // Ensures refreshToken is stored in cookies
+          withCredentials: true, // Ensures cookies are included
           headers: { "Content-Type": "application/json" },
         }
       );
 
-      // Extract tokens correctly
-      const { token, refreshToken } = response.data;
-      console.log("Received Tokens:", { token, refreshToken });
+      const { token } = response.data;
+      console.log("Received Token:", token);
 
-      // Validate token structure
       if (!token || token.split(".").length !== 3) {
         throw new Error("Invalid token format received");
       }
 
-      // Decode token
       const decoded = jwtDecode(token);
       console.log("Decoded Token:", decoded);
+
+      if (decoded.exp * 1000 < Date.now()) {
+        console.log({
+          message:  "Expired  Token Login Again"
+        })
+        
+        throw new Error("Token has expired. Please log in again.");
+
+      }
+
 
       if (decoded.role !== "admin") {
         throw new Error("Insufficient privileges");
       }
 
-      // Store tokens securely
+      // ✅ Store access token in localStorage
       localStorage.setItem("adminToken", token);
-      localStorage.setItem("adminRefreshToken", refreshToken);
 
-      console.log("Stored adminToken:", localStorage.getItem("adminToken"));
-      console.log("Stored adminRefreshToken:", localStorage.getItem("adminRefreshToken"));
-
-      // Set Axios default Authorization header
+      // ✅ Set Authorization header for future requests
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      // Redirect after ensuring token is stored
       console.log("Redirecting to dashboard...");
       navigate("/admin/dashboard");
-
     } catch (err) {
       console.error("Authentication error:", err);
-      setError(err.response?.data?.message || "Authentication failed");
+      setError(err.response?.data?.message || "Authentication failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -71,7 +72,6 @@ const AdminLogin = () => {
             <div className="card-body">
               <h2 className="card-title text-center mb-4">Admin Login</h2>
               {error && <div className="alert alert-danger">{error}</div>}
-
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
@@ -85,7 +85,6 @@ const AdminLogin = () => {
                     required
                   />
                 </div>
-
                 <div className="mb-3">
                   <label className="form-label">Password</label>
                   <input
@@ -98,7 +97,6 @@ const AdminLogin = () => {
                     required
                   />
                 </div>
-
                 <button
                   type="submit"
                   className="btn btn-primary w-100"

@@ -30,13 +30,13 @@ const Dashboard = () => {
       console.log("Fetching data...");
     
       const [usersRes, ordersRes, productsRes] = await Promise.all([
-        axios.get("http://localhost:3000/apiV1/majestycollections/allusers", {
+        axios.get("https://majestycollections.onrender.com/allusers", {
           headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
         }),
-        axios.get("http://localhost:3000/apiV1/majestycollections/admin/getorders", {
+        axios.get("https://majestycollections.onrender.com/admin/getorders", {
           headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
         }),
-        axios.get("http://localhost:3000/apiV1/products/fetch"),
+        axios.get("https://majestycollections.onrender.com/products/fetch"),
       ]);
   
       // Log raw responses

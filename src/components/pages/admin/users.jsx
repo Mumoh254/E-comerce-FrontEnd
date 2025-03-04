@@ -29,7 +29,7 @@ const Users = () => {
         }
   
         const response = await axios.get(
-          "http://localhost:3000/apiV1/majestycollections/allusers",
+          "https://majestycollections.onrender.com/allusers",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ const Users = () => {
       try {
         const token = Cookies.get("authToken");
         await axios.delete(
-          `http://localhost:8000/apiV1/majestycollections/deleteuser/${userId}`,
+          `https://majestycollections.onrender.com/deleteuser/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ const Users = () => {
       setOrdersLoading(true);
       const token = Cookies.get("authToken");
       const userResponse = await axios.get(
-        `http://localhost:3000/apiV1/majestycollections/users/${userId}`,
+        `https://majestycollections.onrender.com/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ const Users = () => {
       );
 
       const ordersResponse = await axios.get(
-        `http://localhost:3000/apiV1/majestycollections/users/${userId}/orders`,
+        `https://majestycollections.onrender.com/users/${userId}/orders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
